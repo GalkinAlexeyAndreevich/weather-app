@@ -1,0 +1,1 @@
+export const API_KEY:RequestInit | string = 'lLGSee1VGfVcXibNRVzi3fHJBb0UlMnY'
