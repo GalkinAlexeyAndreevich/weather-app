@@ -1,34 +1,53 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { IWeather } from '../../interfaces';
-import moment from 'moment';
+import { StatusBar } from "expo-status-bar";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { IWeather } from "../../interfaces";
+import moment from "moment";
 
-  
-export default function WeatherItem({weatherItem}:IWeather) {
-    // console.log(weatherItem
-        
-    //     );
-        console.log(weatherItem.IconPhrase);
-        console.log(weatherItem.IsDaylight);
-        
-          
-    
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{moment(weatherItem.DateTime).hours()}:00</Text>
+export default function WeatherItem({ weatherItem }: IWeather & number) {
+	const {
+		0: {
+			DateTime,
+			WeatherIcon,
+			IconPhrase,
+			HasPrecipitation,
+			IsDaylight,
+			Temperature,
+		}
+	} = weatherItem;
+	console.log(weatherItem);
+	console.log(
+		DateTime,
+		WeatherIcon,
+		IconPhrase,
+		HasPrecipitation,
+		IsDaylight,
+		Temperature
+	);
 
-      <Text style={styles.text}>{Math.round((weatherItem.Temperature.Value-32)/1.8)}°</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	return (
+		<View style={styles.container}>
+			<Text style={styles.text}>{moment(DateTime).hours()}:00</Text>
+			<Image
+				source={require(`../../assets/img/icons/${WeatherIcon}.svg`)}
+				style={{ width: 40, height: 40 }}
+			/>
+			<Text style={styles.text}>
+				{Math.round((Temperature.Value - 32) / 1.8)}°
+			</Text>
+			<StatusBar style="auto" />
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent:"center"
-  },
-  text:{
-    fontSize:30
-  }
+	container: {
+		flex: 1,
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	text: {
+		fontSize: 30,
+		padding: 10,
+	},
 });
