@@ -1,35 +1,33 @@
-import axios,{AxiosResponse} from "axios";
+import axios, { AxiosResponse } from "axios";
 import { API_KEY } from "../config";
 import { ICoordination } from "../interfaces/coordination";
-export const getCodeCity = ({latitude,longitude}:ICoordination):string | void=>{
-    try{
-        axios.get(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${API_KEY}&q=${String(latitude +',' +longitude)}`).then((response:AxiosResponse)=>{
-          console.log("djghskd",response.data.Key);   
-          return response.data.Key
-        })
-      }catch(e){
-        console.log("Ошибка");
-      }
+
+
+export const getCodeCity = async ({ latitude, longitude }: ICoordination) => {
+  try {
+    const response = axios.get(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${API_KEY}&q=${String(latitude + ',' + longitude)}`)
+    return response
+  } catch (e) {
+    console.log("Ошибка");
+  }
 }
 
-export const getWeatherOnOneDay = (codeCity:number)=>{
+export const getWeatherOnOneDay = (codeCity: string) => {
 
-    try{
-        axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${codeCity}/?apikey=${API_KEY}`).then((response)=>{
-          console.log(response.data.DailyForecasts);   
-          return response.data.DailyForecasts
-        })
-      }catch(e){
-        console.log("Ошибка");
-    }
+  try {
+    const response = axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${codeCity}/?apikey=${API_KEY}`)
+    return response
+  } catch (e) {
+    console.log("Ошибка");
+  }
 }
 
-export const getWeatherOnTvelweHour = (codeCity:number)=>{
+export const getWeatherOnTvelweHour = (codeCity:string)=>{
     try{
-        axios.get(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${codeCity}/?apikey=${API_KEY}`).then((response)=>{
-          console.log(response.data);   
-          return response.data
-        })
+      console.log(codeCity);
+      
+      const response = axios.get(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${codeCity}/?apikey=${API_KEY}`)
+      return response
       }catch(e){
         console.log("Ошибка");
     }

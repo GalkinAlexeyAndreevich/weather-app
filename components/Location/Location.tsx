@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Platform, Text, View, StyleSheet } from 'react-native';
 import { API_KEY } from '../../config';
 import axios from "axios"
-import { getCodeCity } from '../../api/getWeather';
+import { getCodeCity,  getWeatherOnTvelweHour } from '../../api/getWeather';
 
 import * as Location from 'expo-location';
-import { ICoordination } from '../../interfaces/coordination';
-interface ICode{
-  Key:string
-}
+import { ICoordination,IWeather } from '../../interfaces';
+import WeatherItem from '../WeatherItem';
+
 
 export default function App() {
   const [location, setLocation] = useState<Location.LocationObject | undefined>();
   const [errorMsg, setErrorMsg] = useState<string>('');
-  const [codeCity, setCodeCity] = useState<string>('')
+  const [codeCity, setCodeCity] = useState<string>('1')
+  const [weather,setWeather] = useState<IWeather[]>([])
 
   useEffect(() => {
     (async () => {
@@ -28,17 +28,31 @@ export default function App() {
       
       setLocation(location);
       const coordination:ICoordination = location.coords
-      let code = getCodeCity(coordination)
-      console.log("1358235",code);
+      let code = await getCodeCity(coordination)
+      console.log("1358235",code?.data?.Key);
+      let value = code?.data?.Key
+      console.log(value);
       
-      // console.log(getCodeCity(coordination));
+      setCodeCity(value)
+      console.log(codeCity);
       
-      // setCodeCity()
+      const weaher1 = await getWeatherOnTvelweHour(codeCity)
+      // console.log(weaher?.data);
+      console.log(weaher1?.data);
+      setWeather(weaher1?.data)
 
       
 
     })();
-  }, []);
+  }, [codeCity]);
+  // useEffect(()=>{
+  //   (async () => {
+  //   const weaher1 = await getWeatherOnTvelweHour(codeCity)
+  //   // console.log(weaher?.data);
+  //   console.log(weaher1?.data[0]);
+  //   setWeather(weaher1?.data)
+  // })();
+  // },[codeCity])
 
   let text = 'Waiting..';
   if (errorMsg) {
@@ -49,7 +63,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.paragraph}>{text}</Text> */}
+      {weather?.map((item:IWeather, index:number)=>{
+        console.log(item.DateTime)
+        return <WeatherItem key={index} weatherItem={item}/>
+      })}
+      {/* <Text style={styles.paragraph}>kdfdf</Text> */}
     </View>
   );
 }
