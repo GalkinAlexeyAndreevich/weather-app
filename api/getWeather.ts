@@ -3,8 +3,11 @@ import { API_KEY } from "../config";
 import { ICoordination } from "../interfaces/coordination";
 
 
-export const getCodeCity = async ({ latitude, longitude }: ICoordination) => {
+export const getCodeCity = async (coordination: ICoordination) => {
   try {
+    console.log(coordination);
+    
+    const {latitude, longitude}:ICoordination = coordination
     const response = axios.get(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${API_KEY}&q=${String(latitude + ',' + longitude)}`)
     return response
   } catch (e) {

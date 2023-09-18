@@ -1,47 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { Platform, Text, View, StyleSheet } from "react-native";
-import { API_KEY } from "../../config";
-import axios from "axios";
+
 import { getCodeCity, getWeatherOnTvelweHour } from "../../api/getWeather";
 
-import * as Location from "expo-location";
 import { ICoordination, IWeather } from "../../interfaces";
 import WeatherItem from "../WeatherItem";
+import { useLocation } from "./hooks/Location";
+import * as Location from "expo-location";
+
+
 
 export default function App() {
-	const [location, setLocation] = useState<
-		Location.LocationObject | undefined
-	>();
-	const [errorMsg, setErrorMsg] = useState<string>("");
-	const [codeCity, setCodeCity] = useState<string>("1");
+	const {location, errorMsg} = useLocation()
+	const [codeCity, setCodeCity] = useState<string>("");
 	const [weather, setWeather] = useState<IWeather[]>([]);
 
 	useEffect(() => {
 		(async () => {
-			let { status } = await Location.requestForegroundPermissionsAsync();
-			if (status !== "granted") {
-				setErrorMsg("Вы не разрешили узнать ваше местоположение");
-				return;
-			}
-			let location = await Location.getCurrentPositionAsync({});
 			console.log(location);
-
-			setLocation(location);
-			const coordination: ICoordination = location.coords;
+			if(!location){return}
+			let coordination: ICoordination = location.coords;
 			let code = await getCodeCity(coordination);
-			console.log("1358235", code?.data?.Key);
-			let value = code?.data?.Key;
-			console.log(value);
+			// console.log("1358235", code?.data?.Key);
+			// let value = code?.data?.Key;
+			// console.log(value);
 
-			setCodeCity(value);
-			console.log(codeCity);
+			// setCodeCity(value);
+			// console.log(codeCity);
 
-			const weaher1 = await getWeatherOnTvelweHour(codeCity);
-			// console.log(weaher?.data);
-			console.log(weaher1?.data);
-			setWeather(weaher1?.data);
+			// const weaher1 = await getWeatherOnTvelweHour(codeCity);
+			// // console.log(weaher?.data);
+			// console.log(weaher1?.data);
+			// setWeather(weaher1?.data);
 		})();
-	}, [codeCity]);
+	}, [location]);
 	// useEffect(()=>{
 	//   (async () => {
 	//   const weaher1 = await getWeatherOnTvelweHour(codeCity)
@@ -60,11 +52,12 @@ export default function App() {
 
 	return (
 		<View style={styles.container}>
-			{weather?.map((item: IWeather, index: number) => {
+			{/*			{weather?.map((item: IWeather, index: number) => {
 				console.log(item.DateTime);
 				return <WeatherItem key={index} weatherItem={[item, index]} />;
-			})}
-			{/* <Text style={styles.paragraph}>kdfdf</Text> */}
+			})} */}
+
+			<Text style={styles.paragraph}>kdfdf</Text>
 		</View>
 	);
 }
