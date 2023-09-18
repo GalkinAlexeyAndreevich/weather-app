@@ -1,22 +1,22 @@
 import { StyleSheet, View } from "react-native";
-import {useEffect} from "react"
 import WeatherOnTwelveHour from "../../components/WeatherOnTwelveHour";
-import { useLocation } from "../../components/hooks/Location";
+import WeatherOnFiveDays from "../../components/WeatherOnFiveDays";
+import WeatherNow from "../../components/WeatherNow/WeatherNow";
 
-export default function WeatherPage() {
-      const { dataCity } = useLocation();
-      useEffect(() => {
-            (async()=>{
+export interface IProps {
+	cityCode: string
+}
 
-            })()
-
-      }, [])
-      if(!dataCity)return
-      console.log(dataCity);
+export default function WeatherPage({ cityCode }: IProps) {
+	if (!cityCode) return
+	console.log(cityCode);
 
 	return (
 		<View style={styles.container}>
-			<WeatherOnTwelveHour codeCity={dataCity.Key} />
+			<WeatherNow codeCity={cityCode} />
+			<WeatherOnTwelveHour codeCity={cityCode} />
+			<WeatherOnFiveDays codeCity={cityCode} />
+			
 		</View>
 	);
 }
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
-		flexDirection: "row",
+		flexDirection: "column",
 		// gap:10
 	},
 	paragraph: {

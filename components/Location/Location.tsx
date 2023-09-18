@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Platform, Text, View, StyleSheet } from "react-native";
+import React from "react";
+import { Text, View, StyleSheet } from "react-native";
 
-import { getCodeCity, getWeatherOnTwelveHour } from "../../api/getWeather";
+interface IProps {
+	nameCity: string
+}
 
-import { ICoordination, IDataCity, IWeather } from "../../interfaces";
-import WeatherItem from "../WeatherOnTwelveHour/WeatherItem";
-import { useLocation } from "../hooks/Location";
-
-export default function Location(dataCity:IDataCity) {
-	// const { dataCity, errorMsg } = useLocation();
-
+export default function Location({ nameCity }: IProps) {
 	let text = "Waiting..";
-      console.log(dataCity);
-
-	if (dataCity) {
-		text = dataCity?.LocalizedName;
+	if (nameCity) {
+		text = nameCity;
 	}
-	// 	text = dataCity?.LocalizedName;
-	// }
 
 	return (
 		<View style={styles.container}>
@@ -32,7 +24,7 @@ const styles = StyleSheet.create({
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
-		flexDirection: "row",
+		// flexDirection: "row",
 		// gap:10
 	},
 	paragraph: {

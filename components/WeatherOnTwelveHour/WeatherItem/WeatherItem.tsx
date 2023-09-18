@@ -2,17 +2,18 @@ import { StatusBar } from "expo-status-bar";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { IWeather } from "../../../interfaces";
 import moment from "moment";
+interface IProps{
+	weatherItem:IWeather
+}
 
-export default function WeatherItem({ weatherItem }: IWeather & number) {
+export default function WeatherItem({ weatherItem }:IProps ) {
 	const {
-		0: {
 			DateTime,
 			WeatherIcon,
 			IconPhrase,
 			HasPrecipitation,
 			IsDaylight,
 			Temperature,
-		},
 	} = weatherItem;
 	console.log(weatherItem);
 	console.log(

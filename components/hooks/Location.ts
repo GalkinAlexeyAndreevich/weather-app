@@ -1,15 +1,14 @@
 import * as Location from "expo-location";
 import React, { useState, useEffect } from "react";
 import { ICoordination, IDataCity } from "../../interfaces";
-import { getCodeCity } from "../../api/getWeather";
+import { getCityData } from "../../api/getWeather";
 type TLocation = Location.LocationObject | undefined
-// export interface IDataCity {
-// 	Key:string,
-//       LocalizedName:string
-// }
 export const useLocation = () => {
 	const [errorMsg, setErrorMsg] = useState<string>("");
-      const [dataCity, setDataCity] = useState<IDataCity>();
+    const [cityData, setCityData] = useState<IDataCity>({
+        Key:"",
+        LocalizedName:""
+    });
 
 	useEffect(() => {
 		(async () => {
@@ -22,11 +21,12 @@ export const useLocation = () => {
 			console.log(location);
 
 			let coordination: ICoordination = location.coords;
-			let code = await getCodeCity(coordination);
-			let { Key, LocalizedName } = code?.data;
+			let dataCity = await getCityData(coordination);
+            console.log(dataCity);
+            if(!dataCity)return
 
-			setDataCity({ Key, LocalizedName });
+			setCityData(dataCity);
 		})();
 	}, []);
-	return { dataCity, errorMsg };
+	return { cityData, errorMsg };
 };

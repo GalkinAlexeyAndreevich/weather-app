@@ -6,7 +6,11 @@ import { getWeatherOnTwelveHour } from "../../api/getWeather";
 import { IWeather } from "../../interfaces";
 import WeatherItem from "./WeatherItem";
 
-export default function WeatherOnTwelveHour(codeCity: string) {
+interface IProps{
+	codeCity:string
+}
+
+export default function WeatherOnTwelveHour({codeCity}: IProps) {
       console.log(codeCity);
 
 	const [weather, setWeather] = useState<IWeather[]>([]);
@@ -14,9 +18,9 @@ export default function WeatherOnTwelveHour(codeCity: string) {
 	useEffect(() => {
 		(async () => {
 			const weather = await getWeatherOnTwelveHour(codeCity);
-                  console.log(weather);
-
-			setWeather(weather?.data);
+            console.log(weather);
+			if(!weather)return
+			setWeather(weather);
 		})();
 	}, []);
 
@@ -24,7 +28,7 @@ export default function WeatherOnTwelveHour(codeCity: string) {
 		<View style={styles.container}>
 			{weather?.map((item: IWeather, index: number) => {
 				console.log(item.DateTime);
-				return <WeatherItem key={index} weatherItem={[item, index]} />;
+				return <WeatherItem key={index} weatherItem={item} />;
 			})}
 		</View>
 	);
@@ -37,7 +41,6 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		flexDirection: "row",
-		// gap:10
 	},
 	paragraph: {
 		fontSize: 20,

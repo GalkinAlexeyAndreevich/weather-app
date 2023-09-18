@@ -6,33 +6,36 @@ import WeatherPage from "./Pages/WeatherPage";
 import { useLocation } from "./components/hooks/Location";
 
 export default function App() {
-	const { dataCity, errorMsg } = useLocation();
-      console.log(dataCity);
+	const { cityData, errorMsg } = useLocation();
+	console.log(cityData);
 
-      if(errorMsg){
-            return(		<View style={styles.container}>
-                  <Text>{errorMsg}</Text>
-			{/* <Loading /> */}
-		</View>)
-      }else if(dataCity){
-            return(		<View style={styles.container}>
-			<Location dataCity ={dataCity}/>
-			<WeatherPage />
-			{/* <Loading /> */}
-		</View>)
-      }else{
-            <Loading/>
-      }
-
-
-
+	if (errorMsg) {
+		return (
+			<View style={styles.container}>
+				<Text>{errorMsg}</Text>
+			</View>
+		)
+	} else if (cityData) {
+		return (
+			<View style={styles.container}>
+				<Location nameCity={cityData.LocalizedName} />
+				<WeatherPage cityCode={cityData.Key} />
+			</View>
+		)
+	} else {
+		return (
+			<View style={styles.container}>
+				<Loading />
+			</View>
+		)
+	}
 }
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "green",
-		alignItems: "center",
-		justifyContent: "center",
+		// alignItems: "center",
+		// justifyContent: "center",
 	},
 });
