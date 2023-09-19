@@ -12,7 +12,10 @@ interface IProps{
 export default function WeatherNow({codeCity}: IProps) {
       console.log(codeCity);
 
-	const [weather, setWeather] = useState<IWeatherNow>();
+	const [weather, setWeather] = useState<IWeatherNow>({
+		WeatherIcon:"",
+		Temperature:{Metric:{Value:0}}
+	});
 
 	useEffect(() => {
 		(async () => {
@@ -22,13 +25,16 @@ export default function WeatherNow({codeCity}: IProps) {
 			setWeather(weather);
 		})();
 	}, []);
+	if(!weather.WeatherIcon)return
 	return (
 		<View style={styles.container}>
-			<Image
+			{/* {weather.WeatherIcon && */}
+			 <Image
 				source={require(`../../assets/img/icons/${weather?.WeatherIcon}.svg`)}
 				style={{ width: 40, height: 40 }}
 			/>
-			{/* <Text style={styles.paragraph}>{Math.round(weather?Temperature.Metric.Value)}°</Text> */}
+			{/* } */}
+			<Text style={styles.paragraph}>{Math.round(weather.Temperature.Metric.Value)}°</Text>
 		</View>
 	);
 }
@@ -38,7 +44,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		display: "flex",
 		justifyContent: "center",
-		alignItems: "center",
+		marginTop:20,
 		flexDirection: "row",
 	},
 	paragraph: {

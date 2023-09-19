@@ -27,6 +27,6 @@ export interface IDailyForecasts{
 }
   
 export interface IWeatherNow{
-    WeatherIcon:number
+    WeatherIcon:string
     Temperature:{Metric:Value}
 }

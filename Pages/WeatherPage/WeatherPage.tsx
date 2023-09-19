@@ -16,7 +16,6 @@ export default function WeatherPage({ cityCode }: IProps) {
 			<WeatherNow codeCity={cityCode} />
 			<WeatherOnTwelveHour codeCity={cityCode} />
 			<WeatherOnFiveDays codeCity={cityCode} />
-			
 		</View>
 	);
 }
@@ -24,11 +23,11 @@ export default function WeatherPage({ cityCode }: IProps) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		display: "flex",
-		justifyContent: "center",
+		display: "block",
+		// justifyContent: "center",
 		alignItems: "center",
-		flexDirection: "column",
-		// gap:10
+		// flexDirection: "column",
+		marginBootom:20
 	},
 	paragraph: {
 		fontSize: 20,

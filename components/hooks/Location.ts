@@ -11,12 +11,18 @@ export const useLocation = () => {
     });
 
 	useEffect(() => {
+		
+		
 		(async () => {
+			console.log("test");
 			let { status } = await Location.requestForegroundPermissionsAsync();
+			console.log(status);
+			
 			if (status !== "granted") {
 				setErrorMsg("Вы не разрешили узнать ваше местоположение");
 				return;
 			}
+			
 			let location: TLocation = await Location.getCurrentPositionAsync({});
 			console.log(location);
 
