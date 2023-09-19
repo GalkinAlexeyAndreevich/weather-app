@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 		// justifyContent: "center",
 		alignItems: "center",
 		// flexDirection: "column",
-		marginBootom:20
+		marginBottom:20
 	},
 	paragraph: {
 		fontSize: 20,
