@@ -5,8 +5,14 @@ import Loading from "./components/Loading";
 import WeatherPage from "./Pages/WeatherPage";
 import { useLocation } from "./hooks/Location";
 
+let cityData = {
+	LocalizedName: "Калуга",
+      Key:"293006"
+};
+let errorMsg = ""
+
 export default function App() {
-	const { cityData, errorMsg } = useLocation();
+	// const { cityData, errorMsg } = useLocation();
 	console.log(cityData);
 
 	if (errorMsg) {

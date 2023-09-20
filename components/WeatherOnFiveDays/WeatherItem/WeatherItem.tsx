@@ -1,7 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { IDailyForecasts, IWeather } from "../../../interfaces";
-// import moment from "moment";
 import { convertDate } from "../../../utils/utils";
 interface IProps{
 	weatherItem:IDailyForecasts
@@ -18,12 +17,14 @@ export default function WeatherItem({ weatherItem }:IProps ) {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.text}>{finalDate}</Text>
-			<Text style={styles.column}>
-				max: {Math.round(Temperature.Maximum.Value)}°
-			</Text>
-			<Text style={styles.text}>
-				min: {Math.round(Temperature.Minimum.Value)}°
-			</Text>
+			<View>
+				<Text>max </Text>
+				<Text style={styles.column}>
+					{Math.round(Temperature.Maximum.Value)}°
+				</Text>
+			</View>
+			<Text>min </Text>
+			<Text style={styles.text}>{Math.round(Temperature.Minimum.Value)}°</Text>
 			<StatusBar style="auto" />
 		</View>
 	);

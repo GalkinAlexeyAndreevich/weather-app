@@ -23,11 +23,13 @@ const styles = StyleSheet.create({
 		// flex: 1,
 		display: "flex",
 		// justifyContent: "center",
-		// alignItems: "center",
+		alignItems: "center",
 		// flexDirection: "row",
 		// gap:10
 	},
 	paragraph: {
+            // flex:1,
 		fontSize: 20,
+		// justifyContent:'center'
 	},
 });

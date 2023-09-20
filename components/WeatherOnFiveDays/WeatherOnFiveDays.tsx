@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
 		// flexDirection: "row",
 	},
 	paragraph: {
-		fontSize: 20,
+		fontSize: 5,
 	},
 });

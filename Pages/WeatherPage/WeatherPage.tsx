@@ -2,6 +2,7 @@ import { StyleSheet, View } from "react-native";
 import WeatherOnTwelveHour from "../../components/WeatherOnTwelveHour";
 import WeatherOnFiveDays from "../../components/WeatherOnFiveDays";
 import WeatherNow from "../../components/WeatherNow/WeatherNow";
+import { NavigationContainer } from "@react-navigation/native";
 
 export interface IProps {
 	cityCode: string
@@ -14,8 +15,8 @@ export default function WeatherPage({ cityCode }: IProps) {
 	return (
 		<View style={styles.container}>
 			<WeatherNow codeCity={cityCode} />
-			<WeatherOnTwelveHour codeCity={cityCode} />
-			<WeatherOnFiveDays codeCity={cityCode} />
+			{/* <WeatherOnTwelveHour codeCity={cityCode} />
+			<WeatherOnFiveDays codeCity={cityCode} /> */}
 		</View>
 	);
 }

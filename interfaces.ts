@@ -25,8 +25,9 @@ export interface IDailyForecasts{
     Date:Date,
     Temperature:{Minimum:Value,Maximum:Value}
 }
-  
+
 export interface IWeatherNow{
     WeatherIcon:string
-    Temperature:{Metric:Value}
+    Temperature:{Metric:Value},
+    WeatherText:string
 }
