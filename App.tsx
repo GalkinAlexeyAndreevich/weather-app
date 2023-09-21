@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
 import Location from "./components/Location";
 import Loading from "./components/Loading";
 import WeatherPage from "./Pages/WeatherPage";
@@ -23,10 +23,13 @@ export default function App() {
 		);
 	} else if (cityData) {
 		return (
-			<View style={styles.container}>
-				<Location nameCity={cityData.LocalizedName} />
-				<WeatherPage cityCode={cityData.Key} />
-			</View>
+			<SafeAreaView style={styles.container}>
+				<ScrollView>
+					<Location nameCity={cityData.LocalizedName} />
+					<WeatherPage cityCode={cityData.Key} />
+				</ScrollView>
+
+			</SafeAreaView>
 		);
 	} else {
 		return (
@@ -41,8 +44,10 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		// backgroundColor: "green",
-		alignItems: "center",
+		// alignItems: "center",
 		justifyContent: "center",
+		marginTop:100
+		
 		// flexDirection: "row",
 	},
 });

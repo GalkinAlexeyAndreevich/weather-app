@@ -6,6 +6,7 @@ import {
 	IWeather,
 	IDailyForecasts,
 	IWeatherNow,
+  IAdditionInfo,
 } from "../interfaces";
 
 interface IOnDay {
@@ -69,8 +70,8 @@ export const getWeatherNow = async (codeCity: string)=> {
 	try {
 		console.log(codeCity);
 
-		const { data } = await axios.get<IWeatherNow[]>(
-			`http://dataservice.accuweather.com/currentconditions/v1/${codeCity}?apikey=${API_KEY}&language=ru`
+		const { data } = await axios.get<IWeatherNow & IAdditionInfo[]>(
+			`http://dataservice.accuweather.com/currentconditions/v1/${codeCity}?apikey=${API_KEY}&language=ru&details=true`
 		);
 		return data[0];
 	} catch (e) {

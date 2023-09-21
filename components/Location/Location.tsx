@@ -12,7 +12,7 @@ export default function Location({ nameCity }: IProps) {
 	}
 
 	return (
-		<View style={styles.container}>
+		<View>
 			<Text style={styles.paragraph}>{text}</Text>
 		</View>
 	);
@@ -21,15 +21,18 @@ export default function Location({ nameCity }: IProps) {
 const styles = StyleSheet.create({
 	container: {
 		// flex: 1,
-		display: "flex",
-		// justifyContent: "center",
+		display:"flex",
+		justifyContent: "center",
 		alignItems: "center",
 		// flexDirection: "row",
 		// gap:10
 	},
 	paragraph: {
             // flex:1,
+		display:"flex",
 		fontSize: 20,
-		// justifyContent:'center'
+		justifyContent:'center',
+		alignItems: "center",
+		textAlign:"center"
 	},
 });

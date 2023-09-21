@@ -6,15 +6,16 @@ import { getWeatherOnFiveDays } from "../../api/getWeather";
 import { IDailyForecasts } from "../../interfaces";
 import WeatherItem from "./WeatherItem";
 // import WeatherItem from "./WeatherItem";
-
+import {baseWeatherDataOnFiveDays} from "../../dataForNoFetch"
 interface IProps{
 	codeCity:string
 }
 
+
 export default function WeatherOnFiveDays({codeCity}: IProps) {
       console.log(codeCity);
 
-	const [weather, setWeather] = useState<IDailyForecasts[]>([]);
+	const [weather, setWeather] = useState<IDailyForecasts[]>(baseWeatherDataOnFiveDays);
 
 	useEffect(() => {
 		(async () => {

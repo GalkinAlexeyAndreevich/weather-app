@@ -12,7 +12,7 @@ interface IProps{
 }
 
 let icons = {
-      1:'sun'
+    1:'sun'
 
 }
 
@@ -26,16 +26,16 @@ export default function WeatherNow({codeCity}: IProps) {
       console.log(codeCity);
 
 	const [weather, setWeather] = useState<IWeatherNow>(baseWeather);
-      setWeather
+    //   setWeather
 
-	// useEffect(() => {
-	// 	(async () => {
-	// 		const weather = await getWeatherNow(codeCity);
-      //             console.log(weather);
-	// 		if(!weather)return
-	// 		setWeather(weather);
-	// 	})();
-	// }, []);
+	useEffect(() => {
+		(async () => {
+			const weather = await getWeatherNow(codeCity);
+                  console.log(weather);
+			if(!weather)return
+			setWeather(weather);
+		})();
+	}, []);
 	if(!weather.WeatherIcon)return
 	return (
 		<View style={styles.container}>
@@ -51,18 +51,18 @@ export default function WeatherNow({codeCity}: IProps) {
 				<MaterialCommunityIcons name="weather-cloudy" size={32}></MaterialCommunityIcons>
 			</View>
 
-			{/* } */}
 
-			<Text>{weather.WeatherText}</Text>
+			<Text style={styles.weatherText}>{weather.WeatherText}</Text>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		// flex: 1,
 		display: "flex",
 		justifyContent: "center",
+		alignItems:"center",
 		marginTop:20,
 		flexDirection: "column",
 	},
@@ -70,9 +70,15 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 	},
       row:{
-            flex:1,
+            // flex:1,
             flexDirection:'row',
             alignItems:"center",
             justifyContent:'center'
-      }
+      },
+	  weatherText:{
+		display:"flex",
+		alignItems:"center",
+		justifyContent:'center',
+		textAlign:"center"
+	  }
 });
