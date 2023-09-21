@@ -15,8 +15,6 @@ export interface IWeather{
     DateTime:Date,
     WeatherIcon:number,
     IconPhrase:string,
-    // HasPrecipitation:boolean,
-    // IsDaylight:boolean,
     Temperature:Value
 }
 
@@ -41,8 +39,11 @@ export interface IAdditionInfo{
             Localized:string
         },
         Speed:{
-            Value:number,
-            Unit:string
+            Metric:{
+                Value:number,
+                Unit:string
+            }
+
         }
     },
     Pressure:{
@@ -50,3 +51,5 @@ export interface IAdditionInfo{
     },
     RelativeHumidity:number
 }
+
+export type TWeatherAndAdditionNow = IWeatherNow & IAdditionInfo

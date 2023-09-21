@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {View, StyleSheet, ScrollView, Text } from "react-native";
 import { IAdditionInfo } from "../../interfaces";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 
 interface IProps{
@@ -11,12 +11,14 @@ const mbToMMHG = (mb:number)=>{
     return Math.round(mb*0.750062)
 }
 const kmHToMc = (speed:number)=>{
+    console.log(speed);
+    
     return Math.round(speed*0.750062)
 }
 
 export default function AdditionWeatherInfoNow({additionInfo}: IProps) {
     console.log(additionInfo);
-
+    
 	// const [additionInfo, setAdditionInfo] = useState<IAdditionInfo>();
     if(!additionInfo)return
 
@@ -25,7 +27,8 @@ export default function AdditionWeatherInfoNow({additionInfo}: IProps) {
 		<View style={styles.container}>
             <View style={styles.row}>
                 <MaterialCommunityIcons  name="weather-windy" size={24}></MaterialCommunityIcons>
-                <Text style={styles.paragraph}>{kmHToMc(additionInfo.Wind.Speed.Value)}м/с,{additionInfo.Wind.Direction.Localized}</Text>
+                <Text style={styles.paragraph}>{kmHToMc(Number(additionInfo.Wind.Speed.Metric.Value))}м/с,{additionInfo.Wind.Direction.Localized}</Text>
+                <FontAwesome style={{transform:[{rotate:`${additionInfo.Wind.Direction.Degrees-50}deg`}], padding:10}} name="location-arrow" size={15} color="black" />
             </View>
             <View style={styles.row}>
                 <SimpleLineIcons name="speedometer" size={24} />
@@ -63,5 +66,5 @@ const styles = StyleSheet.create({
         display:"flex",
         flexDirection:"row",
         paddingBottom:4
-    }
+    },
 });

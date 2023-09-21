@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {View, StyleSheet, ScrollView } from "react-native";
+import {View, StyleSheet } from "react-native";
 
 import { getWeatherOnTwelveHour } from "../../api/getWeather";
 
 import { IWeather } from "../../interfaces";
 import WeatherItem from "./WeatherItem";
-import { baseWeatherDataOnTvelweHours } from "../../dataForNoFetch";
-import AdditionWeatherInfoNow from "../AdditionWeatherInfoNow";
+import { baseWeatherDataOnTwelveHours } from "../../dataForNoFetch";
 
 interface IProps{
 	codeCity:string
@@ -15,7 +14,7 @@ interface IProps{
 export default function WeatherOnTwelveHour({codeCity}: IProps) {
       console.log(codeCity);
 
-	const [weather, setWeather] = useState<IWeather[]>(baseWeatherDataOnTvelweHours);
+	const [weather, setWeather] = useState<IWeather[]>(baseWeatherDataOnTwelveHours);
 
 	useEffect(() => {
 		(async () => {
@@ -28,12 +27,9 @@ export default function WeatherOnTwelveHour({codeCity}: IProps) {
 
 	return (
 		<View style={styles.container}>
-			<ScrollView horizontal={true}>
-				<AdditionWeatherInfoNow additionInfo={}/>
 				{weather?.map((item: IWeather, index: number) => {
 					return <WeatherItem key={index} weatherItem={item} />;
 				})}
-			</ScrollView>
 
 		</View>
 	);
@@ -43,8 +39,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		display: "flex",
-		// justifyContent: "center",
-		// alignItems: "center",
 		flexDirection: "row",
 		
 	},

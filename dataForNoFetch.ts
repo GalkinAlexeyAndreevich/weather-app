@@ -39,7 +39,7 @@ export const baseWeatherDataOnFiveDays:IDailyForecasts[] = [
 	}
 ]
 
-export const baseWeatherDataOnTvelweHours:IWeather[] = [
+export const baseWeatherDataOnTwelveHours:IWeather[] = [
     {
         DateTime:new Date("2023-09-21T14:00:00+03:00"),
         WeatherIcon:7,

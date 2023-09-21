@@ -1,2 +1,1 @@
-export { default }
-from "./WeatherOnTwelveHour";
+export { default } from "./WeatherOnTwelveHour";
