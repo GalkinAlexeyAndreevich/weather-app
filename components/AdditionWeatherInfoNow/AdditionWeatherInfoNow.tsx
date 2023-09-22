@@ -25,6 +25,7 @@ export default function AdditionWeatherInfoNow({ additionInfo }: IProps) {
     <View style={styles.container}>
       <View style={styles.row}>
         <MaterialCommunityIcons
+        style={styles.img}
           name="weather-windy"
           size={24}
         ></MaterialCommunityIcons>
@@ -35,15 +36,14 @@ export default function AdditionWeatherInfoNow({ additionInfo }: IProps) {
         <FontAwesome
           style={{
             transform: [
-              { rotate: `${additionInfo.Wind.Direction.Degrees - 45 + 90}deg` },
+              { rotate: `${additionInfo.Wind.Direction.Degrees - 45}deg` },
             ],
-            // padding: 10,
 
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            top: -2,
-            marginLeft:7
+            top:"auto",
+            marginLeft:7,
           }}
           name="location-arrow"
           size={15}
@@ -51,13 +51,13 @@ export default function AdditionWeatherInfoNow({ additionInfo }: IProps) {
         />
       </View>
       <View style={styles.row}>
-        <SimpleLineIcons name="speedometer" size={24} />
+        <SimpleLineIcons style={styles.img} name="speedometer" size={24} />
         <Text style={styles.paragraph}>
           {mbToMMHG(additionInfo.Pressure.Metric.Value)} мм рт. ст.
         </Text>
       </View>
       <View style={styles.row}>
-        <SimpleLineIcons name="drop" size={24} />
+        <SimpleLineIcons style={styles.img} name="drop" size={24} />
         <Text style={styles.paragraph}>{additionInfo.RelativeHumidity}%</Text>
       </View>
     </View>
@@ -75,14 +75,17 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 15,
-    display: "flex",
-    textAlign: "center",
-    textAlignVertical: "center",
     paddingLeft: 4,
   },
   row: {
     display: "flex",
+    alignItems:"center",
     flexDirection: "row",
     paddingBottom: 4,
   },
+  img:{
+    display:'flex',
+    justifyContent:"center",
+    alignItems:"center"
+  }
 });

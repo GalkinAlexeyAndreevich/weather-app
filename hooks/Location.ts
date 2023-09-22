@@ -13,8 +13,7 @@ export const useLocation = () => {
 	useEffect(() => {
 		(async () => {
 			console.log("test");
-			let { status } = await Location.requestForegroundPermissionsAsync();
-			console.log(status);
+			let { status } = await Location.requestForegroundPermissionsAsync()
 
 			if (status !== "granted") {
 				setErrorMsg("Вы не разрешили узнать ваше местоположение");
@@ -22,8 +21,6 @@ export const useLocation = () => {
 			}
 
 			let location: TLocation = await Location.getCurrentPositionAsync({});
-			console.log(location);
-
 			let coordination: ICoordination = location.coords;
 			let dataCity = await getCityData(coordination);
 			console.log(dataCity);

@@ -8,22 +8,12 @@ interface IProps {
   weatherNow: IWeatherNow;
 }
 
-
-
 export default function WeatherNow({ weatherNow }: IProps) {
-  let baseWeather: IWeatherNow = {
-    WeatherIcon: "1",
-    Temperature: { Metric: { Value: 20 } },
-    WeatherText: "Солнечно",
-  };
 
-  // const [weather, setWeather] = useState<IWeatherNow>(baseWeather);
-  //   setWeather
 
   if (!weatherNow.WeatherIcon) return;
   return (
     <View style={styles.container}>
-      {/* {weather.WeatherIcon && */}
       <View style={styles.row}>
         <Text style={styles.paragraph}>
           {Math.round(weatherNow.Temperature.Metric.Value)}°
@@ -32,7 +22,6 @@ export default function WeatherNow({ weatherNow }: IProps) {
 		source={{uri:`https://developer.accuweather.com/sites/default/files/${Number(weatherNow.WeatherIcon)<10?'0'+weatherNow.WeatherIcon:weatherNow.WeatherIcon}-s.png`}}			  
 		style={{ width: 40, height: 40 }}
         />
-        {/* <MaterialCommunityIcons name="weather-cloudy" size={32}></MaterialCommunityIcons> */}
       </View>
 
       <Text style={styles.weatherText}>{weatherNow.WeatherText}</Text>

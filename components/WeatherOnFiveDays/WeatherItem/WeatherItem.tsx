@@ -14,7 +14,6 @@ export default function WeatherItem({ weatherItem }: IProps) {
 		Day,
 		Night
 	} = weatherItem;
-	console.log(Day.Icon);
 	
 	{ convertDate(Date) }
 	let finalDate = `${convertDate(Date).month} ${convertDate(Date).day}`;
@@ -57,13 +56,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: "flex",
-    // alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
     marginTop: 10,
-    marginLeft: 20,
-    marginRight: 20,
-    // maxWidth:350
+    padding:15,
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor: "thistle",
+    // backgroundColor:'pink'
   },
   text: {
     fontSize: 15,

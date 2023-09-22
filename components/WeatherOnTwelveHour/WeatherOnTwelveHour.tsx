@@ -12,18 +12,17 @@ interface IProps{
 }
 
 export default function WeatherOnTwelveHour({codeCity}: IProps) {
-      console.log(codeCity);
 
 	const [weather, setWeather] = useState<IWeather[]>(baseWeatherDataOnTwelveHours);
 
-	useEffect(() => {
-		(async () => {
-			const weather = await getWeatherOnTwelveHour(codeCity);
-            console.log(weather);
-			if(!weather)return
-			setWeather(weather);
-		})();
-	}, []);
+	// useEffect(() => {
+	// 	(async () => {
+	// 		const weather = await getWeatherOnTwelveHour(codeCity);
+    //         console.log(weather);
+	// 		if(!weather)return
+	// 		setWeather(weather);
+	// 	})();
+	// }, []);
 
 	return (
 		<View style={styles.container}>

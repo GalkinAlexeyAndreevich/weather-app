@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { FlatList, ScrollView, StyleSheet, View } from "react-native";
 import WeatherOnTwelveHour from "../../components/WeatherOnTwelveHour";
 import WeatherOnFiveDays from "../../components/WeatherOnFiveDays";
 import WeatherNow from "../../components/WeatherNow/WeatherNow";
@@ -6,52 +6,38 @@ import AdditionWeatherInfoNow from "../../components/AdditionWeatherInfoNow";
 import { useEffect, useState } from "react";
 import { getWeatherNow } from "../../api/getWeather";
 import { IAdditionInfo, IWeatherNow } from "../../interfaces";
+import { additionInfo, baseWeatherNow } from "../../dataForNoFetch";
 
 export interface IProps {
 	cityCode: string
 }
-// const additionInfo = {
-//     Wind:{
-//         Direction:{
-//             Degrees:260,
-//             Localized:'ЮЗ'
-//         },
-//         Speed:{
-//             Value:15,
-//             Unit:'km/h'
-//         }
-//     },
-//     Pressure:{
-//         Metric:{
-// 			Value:1020
-// 		}
-//     },
-//     RelativeHumidity:69
-// }
+
 
 export default function WeatherPage({ cityCode }: IProps) {
 	if (!cityCode) return
 	const [weatherNow, setWeatherNow] = useState<IWeatherNow>();
-	const [additionInfo, setAdditionInfo] = useState<IAdditionInfo>();
+	// const [additionInfo, setAdditionInfo] = useState<IAdditionInfo>();
 
-	useEffect(()=>{
-		(async () => {
-			const weather = await getWeatherNow(cityCode);
-                  console.log(weather);
-			if(!weather)return
-			setWeatherNow({WeatherIcon:weather.WeatherIcon,Temperature:weather.Temperature,WeatherText:weather.WeatherText});
-			setAdditionInfo({Wind:weather.Wind,Pressure:weather.Pressure,RelativeHumidity:weather.RelativeHumidity})
-		})();
-	},[])
+	// useEffect(()=>{
+	// 	(async () => {
+	// 		const weather = await getWeatherNow(cityCode);
+    //         console.log(weather);
+	// 		if(!weather)return
+	// 		const {WeatherIcon,Temperature,WeatherText, Wind,Pressure,RelativeHumidity}=weather
+	// 		setWeatherNow({WeatherIcon,Temperature,WeatherText});
+	// 		setAdditionInfo({Wind,Pressure,RelativeHumidity})
+	// 	})();
+	// },[])
 
 	return (
 		<View style={styles.container}>
-			{weatherNow && <WeatherNow weatherNow={weatherNow}/>}
+			{baseWeatherNow && <WeatherNow weatherNow={baseWeatherNow}/>}
 			<View style={styles.row}>
 				<ScrollView horizontal={true}>
 					{additionInfo &&<AdditionWeatherInfoNow additionInfo={additionInfo}/>}
-					<WeatherOnTwelveHour codeCity={cityCode} />
+					<WeatherOnTwelveHour codeCity={cityCode} />				
 				</ScrollView>
+
 
 			</View>	
 			<WeatherOnFiveDays codeCity={cityCode} />

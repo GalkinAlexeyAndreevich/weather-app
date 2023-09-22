@@ -16,14 +16,14 @@ export default function WeatherOnFiveDays({codeCity}: IProps) {
 
 	const [weather, setWeather] = useState<IDailyForecasts[]>(baseWeatherDataOnFiveDays);
 
-	useEffect(() => {
-		(async () => {
-			const weather = await getWeatherOnFiveDays(codeCity);
-            console.log(weather);
-			if(!weather)return
-			setWeather(weather);
-		})();
-	}, []);
+	// useEffect(() => {
+	// 	(async () => {
+	// 		const weather = await getWeatherOnFiveDays(codeCity);
+    //         console.log(weather);
+	// 		if(!weather)return
+	// 		setWeather(weather);
+	// 	})();
+	// }, []);
 
 	return (
 		<View style={styles.container}>
