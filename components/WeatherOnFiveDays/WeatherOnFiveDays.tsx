@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		display: "flex",
 		justifyContent: "center",
-		alignItems: "center",
+		// alignItems: "center",
 	},
 	paragraph: {
 		fontSize: 5,

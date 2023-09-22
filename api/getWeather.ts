@@ -41,8 +41,6 @@ export const getWeatherOnOneDay = async (codeCity: string) => {
 
 export const getWeatherOnTwelveHour = async (codeCity: string) => {
     try {
-        console.log(codeCity);
-
         const { data } = await axios.get<IWeather[]>(
             `http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${codeCity}/?apikey=${API_KEY}&metric=true`
         );
@@ -54,7 +52,6 @@ export const getWeatherOnTwelveHour = async (codeCity: string) => {
 
 export const getWeatherOnFiveDays = async (codeCity: string) => {
     try {
-        console.log(codeCity);
 
         const { data } = await axios.get<IOnDay>(
             `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${codeCity}?apikey=${API_KEY}&metric=true&language=ru`
@@ -67,7 +64,6 @@ export const getWeatherOnFiveDays = async (codeCity: string) => {
 
 export const getWeatherNow = async (codeCity: string) => {
     try {
-        console.log(codeCity);
 
         const { data } = await axios.get<TWeatherAndAdditionNow[]>(
             `http://dataservice.accuweather.com/currentconditions/v1/${codeCity}?apikey=${API_KEY}&language=ru&details=true`

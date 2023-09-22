@@ -14,26 +14,22 @@ export default function WeatherItem({ weatherItem }:IProps ) {
 			IconPhrase,
 			Temperature,
 	} = weatherItem;
-	console.log(weatherItem);
-	console.log(
-		DateTime,
-		WeatherIcon,
-		IconPhrase,
-		Temperature
-	);
 	return (
-		<View style={styles.container}>
-			<Text style={styles.text}>{moment(DateTime).hours()}:00</Text>
-			{/* <Image
-				source={require(`../../../assets/img/icons/${WeatherIcon}.svg`)}
-				style={{ width: 40, height: 40 }}
-			/> */}
-			<MaterialCommunityIcons name="weather-cloudy" size={32}></MaterialCommunityIcons>
-			<Text style={styles.text}>{Math.round(Temperature.Value)}°</Text>
-			
-			{/* <StatusBar style="auto" /> */}
-		</View>
-	);
+    <View style={styles.container}>
+      <Text style={styles.text}>{moment(DateTime).hours()}:00</Text>
+      <Image
+        source={{
+          uri: `https://developer.accuweather.com/sites/default/files/${
+            Number(WeatherIcon) < 10 ? ("0" + WeatherIcon) : WeatherIcon
+          }-s.png`,
+        }}
+        style={{ width: 40, height: 40 }}
+      />
+      <Text style={styles.text}>{Math.round(Temperature.Value)}°</Text>
+
+      {/* <StatusBar style="auto" /> */}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

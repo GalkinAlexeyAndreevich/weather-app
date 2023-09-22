@@ -31,7 +31,6 @@ export interface IProps {
 
 export default function WeatherPage({ cityCode }: IProps) {
 	if (!cityCode) return
-	console.log(cityCode);
 	const [weatherNow, setWeatherNow] = useState<IWeatherNow>();
 	const [additionInfo, setAdditionInfo] = useState<IAdditionInfo>();
 
@@ -62,7 +61,8 @@ export default function WeatherPage({ cityCode }: IProps) {
 
 const styles = StyleSheet.create({
 	container: {
-		marginBottom:20
+		marginBottom:20,
+
 	},
 	paragraph: {
 		fontSize: 20,
