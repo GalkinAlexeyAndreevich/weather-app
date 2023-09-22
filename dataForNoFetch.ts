@@ -140,7 +140,7 @@ export const baseWeatherDataOnTwelveHours:IWeather[] = [
 export const additionInfo:IAdditionInfo = {
     Wind:{
         Direction:{
-            Degrees:260,
+            Degrees:225,
             Localized:'ЮЗ'
         },
         Speed:{
