@@ -25,7 +25,7 @@ let errorMsg = "";
 const Stack = createNativeStackNavigator();
 export default function App() {
   // const { cityData, errorMsg } = useLocation();
-  console.log(cityData);
+  // console.log(cityData);
 
 //   if (errorMsg) {
 //     return (
@@ -57,14 +57,10 @@ export default function App() {
 //     );
 //   }
 return(
-    <NavigationContainer>
-      <Stack.Navigator>
-	  	
-        <Stack.Screen name="Settings" component={SettingsPage} />
-        <Stack.Screen name="Test" component={TestPage} />
-		<Stack.Screen name="Weather" component={WeatherPage}  />
-      </Stack.Navigator>
-    </NavigationContainer>
+  <View style={styles.container}>
+   <AppNavigator/>
+  </View>
+ 
 	
 )
 }
@@ -73,8 +69,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 100,
+    // alignItems: "center",
+    // justifyContent: "center",
+    // marginTop: 100,
   },
 });

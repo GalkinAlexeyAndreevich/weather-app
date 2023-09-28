@@ -137,7 +137,7 @@ export const baseWeatherDataOnTwelveHours:IWeather[] = [
     }
 ]
 
-export const additionInfo:IAdditionInfo = {
+export const baseAdditionInfo:IAdditionInfo = {
     Wind:{
         Direction:{
             Degrees:225,

@@ -1,13 +1,30 @@
-import { Button, Text, View } from "react-native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Button, Pressable, Text, View } from "react-native";
+import { RootStackParamList } from "../../routes/routes";
 
-export default function SettingsPage({navigation}){
-    const loadScene = ()=>{
-        navigation.navigate("Weather",{cityCode:293006})
+type TProps = NativeStackScreenProps<RootStackParamList>;
+
+
+export default function SettingsPage({navigation}:TProps){
+    const loadTest = ()=>{
+        navigation.navigate("TestPage")
+    }
+    const loadWeather = ()=>{
+        navigation.navigate("WeatherPage",{codeCity:"293006"})
     }
     return(
         <View>
             <Text>Я страница настроек</Text>
-            <Button title="Открыть тестовую страницу" onPress={loadScene}>Тестовая станица</Button>
+            <Pressable
+            onPress={loadTest}
+            >
+            <Text>Открыть тестовую страницу</Text>
+          </Pressable>
+          <Pressable
+            onPress={loadWeather}
+            >
+            <Text>Открыть погоду</Text>
+          </Pressable>
         </View>
     )
 }
