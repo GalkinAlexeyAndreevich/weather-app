@@ -5,7 +5,7 @@ import { getWeatherOnTwelveHour } from "../../api/getWeather";
 
 import { IWeather } from "../../interfaces";
 import WeatherItem from "./WeatherItem";
-import { baseWeatherDataOnTwelveHours } from "../../dataForNoFetch";
+import { baseWeatherDataOnTwelveHours } from "../../config/dataForNoFetch";
 
 interface IProps{
 	codeCity:string

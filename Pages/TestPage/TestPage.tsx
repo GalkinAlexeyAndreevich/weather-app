@@ -9,7 +9,7 @@ export default function TestPage({navigation}:TProps){
         navigation.navigate("SettingsPage")
     }
     return(
-        <View>
+        <View style={{marginTop:50}}>
             <Text>Я тестовая страница</Text>
             <Pressable
             onPress={loadPage}

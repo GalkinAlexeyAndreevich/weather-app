@@ -1,4 +1,4 @@
-import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import WeatherOnTwelveHour from "../../components/WeatherOnTwelveHour";
 import WeatherOnFiveDays from "../../components/WeatherOnFiveDays";
 import WeatherNow from "../../components/WeatherNow/WeatherNow";
@@ -6,9 +6,10 @@ import AdditionWeatherInfoNow from "../../components/AdditionWeatherInfoNow";
 import { useEffect, useState } from "react";
 import { getWeatherNow } from "../../api/getWeather";
 import { IAdditionInfo, IWeatherNow } from "../../interfaces";
-import { baseAdditionInfo, baseWeatherNow } from "../../dataForNoFetch";
+import { baseAdditionInfo, baseWeatherNow } from "../../config/dataForNoFetch";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes/routes";
+import { Ionicons } from '@expo/vector-icons';
 
 // export interface IProps {
 // 	cityCode: string
@@ -17,16 +18,45 @@ import { RootStackParamList } from "../../routes/routes";
 type TProps = NativeStackScreenProps<RootStackParamList, 'WeatherPage'>;
 
 
-export default function WeatherPage({ route,navigation }: TProps) {
+export default function WeatherPage({ route, navigation }: TProps) {
 	// if (!cityCode) return
 	console.log(route);
 
 	const [weatherNow, setWeatherNow] = useState<IWeatherNow>(baseWeatherNow);
 	let cityCode = route.params.codeCity
 	const [additionInfo, setAdditionInfo] = useState<IAdditionInfo>(baseAdditionInfo);
-	const loadSettingsPage =()=>{
-        navigation.navigate("SettingsPage")
-    }
+	const loadSettingsPage = () => {
+		navigation.navigate("SettingsPage")
+	}
+
+	useEffect(()=>{
+		navigation.setOptions({
+			// headerStyle:{
+			// 	justifyContent:"center",
+			// }
+			headerLeft:()=>(
+				<Pressable
+				onPress={loadSettingsPage}
+				style={{
+					display:"flex",
+					alignItems:"center",
+				}}
+				>
+					<Ionicons name="menu" size={24} color="black" />
+				</Pressable>
+			  ),
+			headerRight: () => (
+				<Pressable
+				onPress={loadSettingsPage}
+				>
+					<Ionicons style={styles.settings} name="settings-outline" size={24} color="black" />
+				</Pressable>
+			  ),
+
+			  title:"Город",
+			  headerTitleAlign:"center"
+		})
+	})
 	// useEffect(()=>{
 	// 	(async () => {
 	// 		const weather = await getWeatherNow(cityCode);
@@ -41,14 +71,8 @@ export default function WeatherPage({ route,navigation }: TProps) {
 	return (
 		<View style={styles.container}>
 			<ScrollView alwaysBounceVertical={false} horizontal={false} showsVerticalScrollIndicator={false} >
-				<View style={styles.citySettings}>
-					<Text style={styles.title}>Город</Text>
-					<Pressable
-						onPress={loadSettingsPage}
-						>
-						<Text style={styles.settings}>Настройки</Text>
-					</Pressable>
-				</View>
+
+				{/* <Text style={styles.title}>Город</Text> */}
 
 				{weatherNow && <WeatherNow weatherNow={weatherNow} />}
 				<View style={styles.row}>
@@ -68,11 +92,10 @@ export default function WeatherPage({ route,navigation }: TProps) {
 
 const styles = StyleSheet.create({
 	container: {
-		marginBottom: 20,
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "center",
-		// marginTop: 200,
+		
 	},
 	paragraph: {
 		fontSize: 20,
@@ -83,17 +106,14 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		display: "flex",
-		justifyContent: "center",
-		textAlign: "center"
+		textAlign:"center",
+		justifyContent:"center",
+		fontSize: 20,
 	},
-	settings:{
-		display:"flex",
-		textAlign:"right"
+	settings: {
+	// 	marginLeft: "auto",
+		marginRight: 10,
+	// 	marginTop: 50,
 	},
-	citySettings:{
-		display: "flex",
-		flexDirection: "row",
-		alignItems:"center",
-		justifyContent:"center"
-	}
+
 });

@@ -5,7 +5,7 @@ import { getWeatherOnFiveDays } from "../../api/getWeather";
 
 import { IDailyForecasts } from "../../interfaces";
 import WeatherItem from "./WeatherItem";
-import {baseWeatherDataOnFiveDays} from "../../dataForNoFetch"
+import {baseWeatherDataOnFiveDays} from "../../config/dataForNoFetch"
 interface IProps{
 	codeCity:string
 }
