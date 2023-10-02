@@ -1,17 +1,16 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View,Appearance } from "react-native";
 import { RootStackParamList } from "../../routes/routes";
-import { Ionicons } from '@expo/vector-icons';
-
+import { useTheme } from "../../store/ThemeContext";
 type TProps = NativeStackScreenProps<RootStackParamList>;
 
-
-export default function SettingsPage({ navigation }: TProps) {
+function SettingsPage({ navigation }: TProps) {
+    const {toggleTheme,theme} = useTheme()
+    // const setTheme=()=>{
+    //     toggleTheme()
+    // }
     const loadTest = () => {
         navigation.navigate("TestPage")
-    }
-    const loadWeather = () => {
-        navigation.navigate("WeatherPage", { codeCity: "293006" })
     }
     return (
         <View  style={styles.container}>
@@ -21,10 +20,19 @@ export default function SettingsPage({ navigation }: TProps) {
                     <Text>Открыть тестовую страницу</Text>
                 </Pressable>
 
+                <Pressable
+                    onPress={toggleTheme}
+                >
+                    <Text>Сменить тему</Text>
+                </Pressable>
+
 
         </View>
     )
 }
+
+
+export default SettingsPage
 
 const styles = StyleSheet.create({
     container: {
@@ -32,6 +40,7 @@ const styles = StyleSheet.create({
         marginLeft: "auto",
         marginRight: "auto",
     },
+
 
 
 });
