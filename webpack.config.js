@@ -9,6 +9,10 @@ module.exports = async function (env, argv) {
     }
     return rule
   })
+  // config.externals= {
+  //   "react-native": true,
+  // }
+  
 
   return config;
 };

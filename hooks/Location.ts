@@ -1,7 +1,7 @@
 import * as Location from "expo-location";
 import React, { useState, useEffect } from "react";
 import { ICoordination, IDataCity } from "../interfaces";
-import { getCityData } from "../api/getWeather";
+import { getCityDataOnCoordination } from "../api/getWeather";
 type TLocation = Location.LocationObject | undefined;
 export const useLocation = () => {
 	const [errorMsg, setErrorMsg] = useState<string>("");
@@ -22,7 +22,7 @@ export const useLocation = () => {
 
 			let location: TLocation = await Location.getCurrentPositionAsync({});
 			let coordination: ICoordination = location.coords;
-			let dataCity = await getCityData(coordination);
+			let dataCity = await getCityDataOnCoordination(coordination);
 			console.log(dataCity);
 			if (!dataCity) return;
 

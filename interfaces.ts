@@ -52,14 +52,6 @@ export interface IAdditionInfo {
 
 export type TWeatherAndAdditionNow = IWeatherNow & IAdditionInfo;
 
-// export interface IColors {
-//     primary: string;
-//     background: string;
-//     card: string;
-//     text: string;
-//     border: string;
-//     notification: string;
-// }
 export interface IColors {
     background: string;
     text: string;
@@ -69,3 +61,10 @@ export interface IColors {
     bgColor:string;
     headingColor:string
 }
+
+export type typeTheme = {
+    theme:"dark" | "light",
+    colors:IColors
+    toggleTheme:()=>void,
+}
+

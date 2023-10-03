@@ -1,11 +1,8 @@
 import SettingsPage from "../Pages/SettingsPage";
 import TestPage from "../Pages/TestPage";
-import {NavigationContainer, DarkTheme,DefaultTheme} from "@react-navigation/native";
+import {NavigationContainer} from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WeatherPage from "../Pages/WeatherPage";
-import { useColorScheme,Appearance } from 'react-native';
-import { useEffect, useState } from "react";
-// import { useColorScheme } from "nativewind";
 
 export type RootStackParamList = {
   SettingsPage: undefined;
@@ -28,8 +25,8 @@ export const AppNavigator = () => {
             title: "Настройки"
           }}
         />
-        <Stack.Screen name="TestPage" component={TestPage} />
-        <Stack.Screen name="WeatherPage" component={WeatherPage} initialParams={{ codeCity: "293006" }} />
+        <Stack.Screen name="TestPage" component={TestPage}/>
+        <Stack.Screen name="WeatherPage" component={WeatherPage} />
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -37,3 +34,4 @@ export const AppNavigator = () => {
 }
 
 
+// initialParams={{ codeCity: "293006" }} 

@@ -15,7 +15,10 @@
 //     }
 // }
 
-export const Colors ={
+import { typeTheme,IColors } from "../interfaces"
+
+
+export const Colors:{light:IColors,dark:IColors} ={
     light:{
         background:"#f4f4f4",
         text:"#111111",
@@ -34,6 +37,24 @@ export const Colors ={
         bgColor:"#161625",
         headingColor:"#292922"
     }
+}   
+
+export const defaultTheme:typeTheme = {
+    theme:"light",
+    colors:Colors.light,
+    // getColors(){
+    //     this.colors = this.theme==="dark"?Colors.light:Colors.dark
+    //     return this.colors
+    // },
+    
+    toggleTheme(){
+      
+        
+       this.theme = this.theme==="dark"?"light":"dark"
+       this.colors = this.theme==="dark"?Colors.dark:Colors.light
+       console.log(this.theme );
+       console.log(this.colors);
+    },
 }
 
 /* .for_light_theme{

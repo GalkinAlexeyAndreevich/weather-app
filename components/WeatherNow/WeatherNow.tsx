@@ -1,47 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
 import { IColors, IWeatherNow } from "../../interfaces";
 import { useTheme } from "../../store/ThemeContext";
-import { Colors } from "../../config/theme";
-
-
 
 interface IProps {
   weatherNow: IWeatherNow;
 }
-const getGlobalStyles = (props:IColors) => StyleSheet.create({
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 20,
-    flexDirection: "column",
-    backgroundColor:props.background
-  },
-  paragraph: {
-    fontSize: 20,
-    color:props.text
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  weatherText: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    color:props.text
-  },
-});
+
 export default function WeatherNow({ weatherNow }: IProps) {
 
-	const {theme} = useTheme()
-	const colors:IColors = Colors[theme=="dark"?"light":"dark"]
-	
-
-  const styles = React.useMemo(() => getGlobalStyles(colors ), [colors]);
+	const {colors}= useTheme()
+  const styles = React.useMemo(() => getGlobalStyles(colors), [colors]);
   if (!weatherNow.WeatherIcon) return;
   return (
     <View style={styles.container}>
@@ -59,17 +28,18 @@ export default function WeatherNow({ weatherNow }: IProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
+const getGlobalStyles = (props:IColors) => StyleSheet.create({
   container: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20,
     flexDirection: "column",
+    // backgroundColor:props.background
   },
   paragraph: {
     fontSize: 20,
+    // color:props.text
   },
   row: {
     flexDirection: "row",
@@ -81,5 +51,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
+    // color:props.text
   },
 });
+

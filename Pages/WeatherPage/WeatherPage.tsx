@@ -3,7 +3,7 @@ import WeatherOnTwelveHour from "../../components/WeatherOnTwelveHour";
 import WeatherOnFiveDays from "../../components/WeatherOnFiveDays";
 import WeatherNow from "../../components/WeatherNow/WeatherNow";
 import AdditionWeatherInfoNow from "../../components/AdditionWeatherInfoNow";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getWeatherNow } from "../../api/getWeather";
 import { IAdditionInfo, IColors, IWeatherNow } from "../../interfaces";
 import { baseAdditionInfo, baseWeatherNow } from "../../config/dataForNoFetch";
@@ -11,30 +11,42 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes/routes";
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from "../../store/ThemeContext";
-import { Colors } from "../../config/theme";
+import { useLocation } from "../../hooks/Location";
 
 // export interface IProps {
 // 	cityCode: string
 // }
 
+const cityData={
+	Key:"293006",
+	LocalizedName:"Калуга"
+}
+
 type TProps = NativeStackScreenProps<RootStackParamList, 'WeatherPage'>;
 
-export default function WeatherPage({ route, navigation }: TProps) {
-	// if (!cityCode) return
-	console.log(route);
+export default function WeatherPage({ navigation }: TProps) {
+	
+	// const {cityData} = useLocation()
+	let cityCode = cityData.Key
+	console.log(cityCode);
+	
+
 	
 	const [weatherNow, setWeatherNow] = useState<IWeatherNow>(baseWeatherNow);
-	let cityCode = route.params.codeCity
+
 	const [additionInfo, setAdditionInfo] = useState<IAdditionInfo>(baseAdditionInfo);
 	const loadSettingsPage = () => {
 		navigation.navigate("SettingsPage")
 	}
-
-	const {theme} = useTheme()
-	const colors:IColors = Colors[theme=="dark"?"light":"dark"]
+	const {theme,colors} = useTheme()
+	console.log(colors);
+	
 	
 	const styles = React.useMemo(() => getGlobalStyles( colors ), [colors]);
-	
+	useEffect(()=>{
+		console.log(cityData);
+		
+	},[cityCode])
 
 	useEffect(()=>{
 		navigation.setOptions({
@@ -52,14 +64,17 @@ export default function WeatherPage({ route, navigation }: TProps) {
 				<Pressable
 				onPress={loadSettingsPage}
 				>
-					<Ionicons style={styles.settings} name="settings-outline" size={24} color="black" />
+					<Ionicons style={styles.settings} name="settings-outline" size={24} color="dark" />
 				</Pressable>
 			  ),
 
-			  title:"Калуга",
-			  headerTitleAlign:"center"
+			title:cityData.LocalizedName,
+			headerTitleAlign:"center",
+
+			  
+			
 		})
-	})
+	},[colors,cityCode])
 	// useEffect(()=>{
 	// 	(async () => {
 	// 		const weather = await getWeatherNow(cityCode);
@@ -70,12 +85,11 @@ export default function WeatherPage({ route, navigation }: TProps) {
 	// 		setAdditionInfo({Wind,Pressure,RelativeHumidity})
 	// 	})();
 	// },[])
-
+	if (!cityCode) return
 	return (
 		<View style={styles.container}>
-			<ScrollView alwaysBounceVertical={false} horizontal={false} showsVerticalScrollIndicator={false} >
+			<ScrollView alwaysBounceVertical={true} horizontal={false} showsVerticalScrollIndicator={false} >
 
-				{/* <Text style={styles.title}>Город</Text> */}
 
 				{weatherNow && <WeatherNow weatherNow={weatherNow} />}
 				<View style={styles.row}>
@@ -92,6 +106,7 @@ export default function WeatherPage({ route, navigation }: TProps) {
 
 	);
 }
+
 
 // const styles = StyleSheet.create({
 // 	container: {
@@ -126,18 +141,19 @@ const getGlobalStyles = (props:IColors) => StyleSheet.create({
 	  display: "flex",
 	  justifyContent: "center",
 	  alignItems: "center",
-	  marginTop: 20,
+	  paddingTop: 20,
 	  flexDirection: "column",
-	  backgroundColor:props.background
+	//   backgroundColor:props.background
 	},
 	paragraph: {
 	  fontSize: 20,
-	  color:props.text
+	//   color:props.text
 	},
 	row: {
 	  flexDirection: "row",
 	  alignItems: "center",
 	  justifyContent: "center",
+	//   width:350
 	},
 	weatherText: {
 	  display: "flex",

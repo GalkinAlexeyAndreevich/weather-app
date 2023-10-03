@@ -1,22 +1,23 @@
 import "react-native-get-random-values";
 import { nanoid } from "nanoid";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View,ScrollView} from "react-native";
 import { AppNavigator } from "./routes/routes";
-import { ThemeProvider } from "./store/ThemeContext";
-import styled from "styled-components/native";
+import { ThemeProvider, useTheme } from "./store/ThemeContext";
+import { useEffect } from "react";
 
-const Container = styled.View`
-    flex: 1;
-    display: "flex";
-    background-color:${props => props.theme.background};
-`
 
 export default function App() {
     return (
-        <ThemeProvider>
-            <Container>
+        <ThemeProvider >
+           {/* <ScrollView horizontal={false} alwaysBounceVertical={false}> */}
+           <View style={{
+                    flex: 1,
+                    display: "flex",
+            }}>
                 <AppNavigator />
-            </Container>
+            </View>
+           {/* </ScrollView> */}
+
         </ThemeProvider>
     );
 }

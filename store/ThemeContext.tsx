@@ -1,61 +1,51 @@
 import React, {createContext, useContext,useState, useEffect} from 'react';
 import {useColorScheme} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-type themeType = 'dark' | 'light'
+import { Colors } from '../config/theme';
+import { IColors } from '../interfaces';
 type contextType = {
     theme:string,
-    toggleTheme:()=>void,
-    useSystemTheme:()=>void
+    colors:IColors
+    toggleTheme:()=>void
 }
-const ThemeContext = createContext<contextType>({theme:'light',toggleTheme:()=>{},useSystemTheme:()=>{}});
+const ThemeContext = createContext<contextType>({theme:'light',colors:Colors.light,toggleTheme:()=>{}});
 
 interface Props {
     children: React.ReactNode;
   }
 export const ThemeProvider = ({children}:Props) => {
   const colorScheme = useColorScheme();
-  const [theme, setTheme] = useState<string>(colorScheme || 'light');
 
+  const [theme, setTheme] = useState<string>(colorScheme || 'light');
+  const [colors,setColors] = useState<IColors>(Colors.light)
   useEffect(() => {
-    // Load saved theme from storage
     const getTheme = async () => {
       try {
         const savedTheme = await AsyncStorage.getItem('theme');
-        if(!savedTheme) return
-        setTheme(savedTheme);
-        console.log(savedTheme,"get");
-        
+        if(savedTheme ==="dark" || savedTheme ==="light"){
+          setTheme(savedTheme);
+          console.log(savedTheme,"get");
+        }
       } catch (error) {
         console.log('Error loading theme:', error);
       }
     };
     getTheme();
   }, []);
-
-  useEffect(() => {
-    // set theme to system selected theme
-    if (colorScheme) {
-      setTheme(colorScheme);
-    }
-  }, [colorScheme]);
+  useEffect(()=>{
+    if(theme==="light")setColors(Colors.light)
+    else if(theme==="dark") setColors(Colors.dark)
+    console.log(colors);
+  },[theme])
 
   const toggleTheme = () => {
     const newTheme = theme == "dark"?"light":"dark"
-    setTheme(newTheme);
-    console.log(newTheme);
-    
-    // Save selected theme to storage
+    setTheme(newTheme);  
     AsyncStorage.setItem('theme', newTheme);
-  };
-  const useSystemTheme = () => {
-    if(!colorScheme)return
-    setTheme(colorScheme);
-    AsyncStorage.setItem('theme', colorScheme);
   };
 
   return (
-    <ThemeContext.Provider value={{theme, toggleTheme,useSystemTheme}}>
+    <ThemeContext.Provider value={{theme,colors, toggleTheme}}>
       {children}
     </ThemeContext.Provider>
   );
