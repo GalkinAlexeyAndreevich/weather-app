@@ -8,6 +8,7 @@ export const useLocation = () => {
 	const [cityData, setCityData] = useState<IDataCity>({
 		Key: "",
 		LocalizedName: "",
+		EnglishName:""
 	});
 
 	useEffect(() => {

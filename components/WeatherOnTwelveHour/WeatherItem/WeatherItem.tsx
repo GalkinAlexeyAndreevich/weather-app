@@ -1,10 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { IWeather } from "../../../interfaces";
+import { IWeatherOnHour } from "../../../interfaces";
 import moment from "moment";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 interface IProps{
-	weatherItem:IWeather
+	weatherItem:IWeatherOnHour
 }
 
 export default function WeatherItem({ weatherItem }:IProps ) {

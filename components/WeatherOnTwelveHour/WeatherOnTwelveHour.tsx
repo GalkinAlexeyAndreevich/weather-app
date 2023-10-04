@@ -3,7 +3,7 @@ import {View, StyleSheet } from "react-native";
 
 import { getWeatherOnTwelveHour } from "../../api/getWeather";
 
-import { IWeather } from "../../interfaces";
+import { IWeatherOnHour } from "../../interfaces";
 import WeatherItem from "./WeatherItem";
 import { baseWeatherDataOnTwelveHours } from "../../config/dataForNoFetch";
 
@@ -13,7 +13,7 @@ interface IProps{
 
 export default function WeatherOnTwelveHour({codeCity}: IProps) {
 
-	const [weather, setWeather] = useState<IWeather[]>(baseWeatherDataOnTwelveHours);
+	const [weather, setWeather] = useState<IWeatherOnHour[]>(baseWeatherDataOnTwelveHours);
 
 	// useEffect(() => {
 	// 	(async () => {
@@ -26,7 +26,7 @@ export default function WeatherOnTwelveHour({codeCity}: IProps) {
 
 	return (
 		<View style={styles.container}>
-				{weather?.map((item: IWeather, index: number) => {
+				{weather?.map((item: IWeatherOnHour, index: number) => {
 					return <WeatherItem key={index} weatherItem={item} />;
 				})}
 

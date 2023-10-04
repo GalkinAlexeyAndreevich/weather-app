@@ -9,9 +9,10 @@ export interface ICoordination {
 export interface IDataCity {
     Key: string;
     LocalizedName: string;
+    EnglishName:string;
 }
 
-export interface IWeather {
+export interface IWeatherOnHour {
     DateTime: Date;
     WeatherIcon: number;
     IconPhrase: string;

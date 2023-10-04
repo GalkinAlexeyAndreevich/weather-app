@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { IDailyForecasts, IWeather } from "../../../interfaces";
+import { IDailyForecasts, IWeatherOnHour } from "../../../interfaces";
 import { convertDate } from "../../../utils/dateConverter";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 interface IProps {

@@ -1,4 +1,4 @@
-import { IAdditionInfo, IDailyForecasts,IWeather, IWeatherNow } from "../interfaces";
+import { IAdditionInfo, IDailyForecasts,IWeatherOnHour, IWeatherNow } from "../interfaces";
 
 export const baseWeatherNow: IWeatherNow = {
     WeatherIcon: "1",
@@ -54,7 +54,7 @@ export const baseWeatherDataOnFiveDays:IDailyForecasts[] = [
 	}
 ]
 
-export const baseWeatherDataOnTwelveHours:IWeather[] = [
+export const baseWeatherDataOnTwelveHours:IWeatherOnHour[] = [
     {
         DateTime:new Date("2023-09-21T14:00:00+03:00"),
         WeatherIcon:7,

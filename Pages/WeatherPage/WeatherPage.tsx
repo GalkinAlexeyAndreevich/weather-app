@@ -19,7 +19,8 @@ import { useLocation } from "../../hooks/Location";
 
 const cityData={
 	Key:"293006",
-	LocalizedName:"Калуга"
+	LocalizedName:"Калуга",
+	EnglishName:"Kaluga"
 }
 
 type TProps = NativeStackScreenProps<RootStackParamList, 'WeatherPage'>;
@@ -108,33 +109,6 @@ export default function WeatherPage({ navigation }: TProps) {
 }
 
 
-// const styles = StyleSheet.create({
-// 	container: {
-// 		display: "flex",
-// 		alignItems: "center",
-// 		justifyContent: "center",
-		
-// 	},
-// 	paragraph: {
-// 		fontSize: 20,
-// 	},
-// 	row: {
-// 		display: "flex",
-// 		flexDirection: "row"
-// 	},
-// 	title: {
-// 		display: "flex",
-// 		textAlign:"center",
-// 		justifyContent:"center",
-// 		fontSize: 20,
-// 	},
-// 	settings: {
-// 	// 	marginLeft: "auto",
-// 		marginRight: 10,
-// 	// 	marginTop: 50,
-// 	},
-
-// });
 
 const getGlobalStyles = (props:IColors) => StyleSheet.create({
 	container: {

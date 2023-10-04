@@ -3,7 +3,7 @@ import { API_KEY } from "../config/configAPI";
 import {
     ICoordination,
     IDataCity,
-    IWeather,
+    IWeatherOnHour,
     IDailyForecasts,
     TWeatherAndAdditionNow,
 } from "../interfaces";
@@ -28,9 +28,24 @@ export const getCityDataOnCoordination = async (coordination: ICoordination) => 
     }
 };
 
+export const getCityDataOnName = async (nameCity: string) => {
+    try {
+        console.log(nameCity);
+
+        const { data } = await axios.get<IDataCity[]>(
+            `
+            http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${nameCity}&language=ru`
+        );
+        return data;
+    } catch (e) {
+        console.log("Ошибка");
+    }
+};
+
+
 export const getWeatherOnOneDay = async (codeCity: string) => {
     try {
-        const { data } = await axios.get<IWeather>(
+        const { data } = await axios.get<IWeatherOnHour>(
             `http://dataservice.accuweather.com/forecasts/v1/daily/1day/${codeCity}/?apikey=${API_KEY}&metric=true`
         );
         return data;
@@ -41,7 +56,7 @@ export const getWeatherOnOneDay = async (codeCity: string) => {
 
 export const getWeatherOnTwelveHour = async (codeCity: string) => {
     try {
-        const { data } = await axios.get<IWeather[]>(
+        const { data } = await axios.get<IWeatherOnHour[]>(
             `http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${codeCity}/?apikey=${API_KEY}&metric=true`
         );
         return data;
@@ -74,3 +89,6 @@ export async function getWeatherNow(codeCity: string): Promise<TWeatherAndAdditi
         console.log("Ошибка");
     }
 }
+
+
+

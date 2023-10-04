@@ -2,10 +2,11 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Pressable, StyleSheet, Text, View, Switch } from "react-native";
 import { RootStackParamList } from "../../routes/routes";
 import { useTheme } from "../../store/ThemeContext";
+import ChooseCity from "../../components/ChooseCity/ChooseCity";
 
 type TProps = NativeStackScreenProps<RootStackParamList>;
 
-function SettingsPage({ navigation }: TProps) {
+function SettingsPage({ navigation,route }: TProps) {
     const { toggleTheme, theme } = useTheme();
 
     const loadTest = () => {
@@ -20,7 +21,7 @@ function SettingsPage({ navigation }: TProps) {
                 <Text style={{paddingRight:50}}>Включить черную тему</Text>
                 <Switch onValueChange={toggleTheme} value={theme === "dark"} />
             </View>
-
+            <ChooseCity {...{navigation,route }}/>
             {/* <Pressable onPress={toggleTheme}>
                 <Text>Сменить тему</Text>
             </Pressable> */}
