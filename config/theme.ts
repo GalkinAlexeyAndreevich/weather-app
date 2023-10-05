@@ -15,7 +15,7 @@
 //     }
 // }
 
-import { typeTheme,IColors } from "../interfaces"
+import { IColors } from "../interfaces"
 
 
 export const Colors:{light:IColors,dark:IColors} ={
@@ -38,37 +38,3 @@ export const Colors:{light:IColors,dark:IColors} ={
         headingColor:"#292922"
     }
 }   
-
-export const defaultTheme:typeTheme = {
-    theme:"light",
-    colors:Colors.light,
-    // getColors(){
-    //     this.colors = this.theme==="dark"?Colors.light:Colors.dark
-    //     return this.colors
-    // },
-    
-    toggleTheme(){
-      
-        
-       this.theme = this.theme==="dark"?"light":"dark"
-       this.colors = this.theme==="dark"?Colors.dark:Colors.light
-       console.log(this.theme );
-       console.log(this.colors);
-    },
-}
-
-/* .for_light_theme{
-    --primary-color:#302ae6;
-    --secondary-color:#536390;
-    --font-color:#424242;
-    --bg-color:#fff;
-    --heading-color:#292922
-}
-
-.for_light_theme{
-    --primary-color:#9a97f3;
-    --secondary-color:#818cab;
-    --font-color:#e1e1ff;
-    --bg-color:#161625;
-    --heading-color:#818cab;
-} */

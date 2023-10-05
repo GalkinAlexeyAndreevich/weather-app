@@ -33,8 +33,7 @@ export async  function getCityDataOnName(nameCity: string):Promise<IDataCity[] |
         console.log(nameCity);
 
         const { data } = await axios.get<IDataCity[]>(
-            `
-            http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${nameCity}&language=ru`
+            ` http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${nameCity}&language=ru`
         );
         return data;
     } catch (e) {
@@ -42,6 +41,18 @@ export async  function getCityDataOnName(nameCity: string):Promise<IDataCity[] |
     }
 };
 
+export async  function getCityOnCode(codeCity: string):Promise<IDataCity | undefined> {
+    try {
+        console.log(codeCity);
+
+        const { data } = await axios.get<IDataCity>(
+            `http://dataservice.accuweather.com/locations/v1/${codeCity}?apikey=${API_KEY}&language=ru&details=true`
+        );
+        return data;
+    } catch (e) {
+        console.log("Ошибка");
+    }
+};
 
 export const getWeatherOnOneDay = async (codeCity: string) => {
     try {
@@ -53,6 +64,8 @@ export const getWeatherOnOneDay = async (codeCity: string) => {
         console.log("Ошибка");
     }
 };
+
+
 
 export const getWeatherOnTwelveHour = async (codeCity: string) => {
     try {

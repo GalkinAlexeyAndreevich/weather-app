@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { setChosenPlace } from "../../store/citySlice";
 import WeatherToday from "../../components/WeatherToday";
 import { cityData } from "../../config/dataForNoFetch";
+import { useCurrentCityData } from "../../hooks/currentCityData";
 
 
 
@@ -20,7 +21,8 @@ import { cityData } from "../../config/dataForNoFetch";
 type TProps = NativeStackScreenProps<RootStackParamList, "WeatherPage">;
 
 export default function WeatherPage({ navigation }: TProps) {
-    // const { cityData } = useLocation();
+    const { cityData } = useLocation();
+	// const result = 	useCurrentCityData()
     const { Key, LocalizedName } = useAppSelector((state) => state.city);
     let cityCode = cityData.Key;
     const loadSettingsPage = () => {
@@ -37,6 +39,7 @@ export default function WeatherPage({ navigation }: TProps) {
 
         dispatch(setChosenPlace(cityData));
     }, [dispatch, cityCode]);
+
 
     useEffect(() => {
         navigation.setOptions({

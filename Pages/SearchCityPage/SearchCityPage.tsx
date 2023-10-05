@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { useAppDispatch } from "../../store/hook";
 import { getCityDataOnName } from "../../api/getWeather";
 import {  setChosenPlace } from "../../store/citySlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SearchCityPage() {
     const inputAccessoryViewID = "uniqueID";
@@ -23,6 +24,10 @@ export default function SearchCityPage() {
         if(data){
             const {Key, EnglishName,LocalizedName} = data[0]
             dispatch(setChosenPlace({Key, EnglishName,LocalizedName}))
+            AsyncStorage.setItem('citySettings',JSON.stringify({
+                searchBy:"nameCity",
+                Key:Key
+            }))
         }     
     };
     return (
