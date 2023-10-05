@@ -6,18 +6,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getCityOnCode } from "../api/getWeather";
 
 export const useCurrentCityData = ()=>{
-    // const [currentCityData, setCurrentCityData] = useState()
-    // const [searchBy, setSearchBy] = useState()
     const [result,setResult] = useState(false)
-
-    // let cityCode = cityData.Key;
+    const { cityData } = useLocation();
     const dispatch = useAppDispatch();
-    // useEffect(() => {
-    //     if (!cityCode) return;
-    //     console.log("dispatch");
-
-    //     dispatch(setChosenPlace(cityData));
-    // }, [dispatch, cityCode]);
     useEffect(() => {
         const getCitySettings = async () => {
           try {
@@ -29,9 +20,10 @@ export const useCurrentCityData = ()=>{
                 const {Key, EnglishName,LocalizedName} = cityOnName
                 cityOnName && dispatch(setChosenPlace({Key, EnglishName,LocalizedName}));
             }else{
-                const { cityData } = useLocation();
-                dispatch(setChosenPlace(cityData));
+              cityData && dispatch(setChosenPlace(cityData));
             }
+            console.log("dispatch data");
+            
           } catch (error) {
             console.log('Error loading city info:', error);
             AsyncStorage.setItem('citySettings',JSON.stringify({
@@ -42,7 +34,7 @@ export const useCurrentCityData = ()=>{
         };
         getCitySettings();
         setResult(true)
-      }, []);
+      }, [cityData]);
       return result
     // const savedTheme = await AsyncStorage.getItem('theme');
 }

@@ -21,27 +21,20 @@ import { useCurrentCityData } from "../../hooks/currentCityData";
 type TProps = NativeStackScreenProps<RootStackParamList, "WeatherPage">;
 
 export default function WeatherPage({ navigation }: TProps) {
-    const { cityData } = useLocation();
-	// const result = 	useCurrentCityData()
+	const result = 	useCurrentCityData()
+    console.log(result);
+    
     const { Key, LocalizedName } = useAppSelector((state) => state.city);
-    let cityCode = cityData.Key;
     const loadSettingsPage = () => {
         navigation.navigate("SettingsPage");
     };
     const { theme, colors } = useTheme();
     console.log(colors);
-    const dispatch = useAppDispatch();
 
     const styles = React.useMemo(() => getGlobalStyles(colors), [colors]);
-    useEffect(() => {
-        if (!cityCode) return;
-        console.log("dispatch");
-
-        dispatch(setChosenPlace(cityData));
-    }, [dispatch, cityCode]);
-
 
     useEffect(() => {
+        if(!Key)return
         navigation.setOptions({
             headerLeft: () => (
                 <Pressable
