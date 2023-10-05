@@ -6,16 +6,12 @@ import { getWeatherOnFiveDays } from "../../api/getWeather";
 import { IDailyForecasts } from "../../interfaces";
 import WeatherItem from "./WeatherItem";
 import {baseWeatherDataOnFiveDays} from "../../config/dataForNoFetch"
-interface IProps{
-	codeCity:string
-}
+import { useAppSelector } from "../../store/hook";
 
-
-export default function WeatherOnFiveDays({codeCity}: IProps) {
-      console.log(codeCity);
+export default function WeatherOnFiveDays() {
 
 	const [weather, setWeather] = useState<IDailyForecasts[]>(baseWeatherDataOnFiveDays);
-
+	const codeCity = useAppSelector(state=>state.city.Key)
 	// useEffect(() => {
 	// 	(async () => {
 	// 		const weather = await getWeatherOnFiveDays(codeCity);
@@ -23,7 +19,7 @@ export default function WeatherOnFiveDays({codeCity}: IProps) {
 	// 		if(!weather)return
 	// 		setWeather(weather);
 	// 	})();
-	// }, []);
+	// }, [codeCity]);
 
 	return (
 		<View style={styles.container}>

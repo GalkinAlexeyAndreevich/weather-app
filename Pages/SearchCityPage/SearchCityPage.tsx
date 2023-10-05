@@ -8,13 +8,22 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import React, { useState } from "react";
+import { useAppDispatch } from "../../store/hook";
+import { getCityDataOnName } from "../../api/getWeather";
+import {  setChosenPlace } from "../../store/citySlice";
 
 export default function SearchCityPage() {
     const inputAccessoryViewID = "uniqueID";
     const initialText = "";
     const [text, setText] = useState(initialText);
-    const handleChangeCity = () => {
+    const dispatch = useAppDispatch()
+    const handleChangeCity = async() => {
         console.log(text);
+        const data = await getCityDataOnName(text)
+        if(data){
+            const {Key, EnglishName,LocalizedName} = data[0]
+            dispatch(setChosenPlace({Key, EnglishName,LocalizedName}))
+        }     
     };
     return (
         <View>

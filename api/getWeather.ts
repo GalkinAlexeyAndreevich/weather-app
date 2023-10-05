@@ -28,7 +28,7 @@ export const getCityDataOnCoordination = async (coordination: ICoordination) => 
     }
 };
 
-export const getCityDataOnName = async (nameCity: string) => {
+export async  function getCityDataOnName(nameCity: string):Promise<IDataCity[] | undefined> {
     try {
         console.log(nameCity);
 
@@ -57,7 +57,7 @@ export const getWeatherOnOneDay = async (codeCity: string) => {
 export const getWeatherOnTwelveHour = async (codeCity: string) => {
     try {
         const { data } = await axios.get<IWeatherOnHour[]>(
-            `http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${codeCity}/?apikey=${API_KEY}&metric=true`
+            `http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${codeCity}/?apikey=${API_KEY}&metric=true&language=ru`
         );
         return data;
     } catch (e) {
@@ -82,7 +82,7 @@ export async function getWeatherNow(codeCity: string): Promise<TWeatherAndAdditi
         console.log(codeCity);
 
         const { data } = await axios.get<TWeatherAndAdditionNow[]>(
-            `http://dataservice.accuweather.com/currentconditions/v1/${codeCity}?apikey=${API_KEY}&language=ru`
+            `http://dataservice.accuweather.com/currentconditions/v1/${codeCity}?apikey=${API_KEY}&language=ru&details=true`
         );
         return data[0];
     } catch (e) {

@@ -3,7 +3,6 @@ import { nanoid } from "nanoid";
 import { StyleSheet, View,ScrollView} from "react-native";
 import { AppNavigator } from "./routes/routes";
 import { ThemeProvider, useTheme } from "./store/ThemeContext";
-import { useEffect } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
 

@@ -22,9 +22,6 @@ function SettingsPage({ navigation,route }: TProps) {
                 <Switch onValueChange={toggleTheme} value={theme === "dark"} />
             </View>
             <ChooseCity {...{navigation,route }}/>
-            {/* <Pressable onPress={toggleTheme}>
-                <Text>Сменить тему</Text>
-            </Pressable> */}
         </View>
     );
 }

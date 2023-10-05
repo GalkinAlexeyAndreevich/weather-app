@@ -1,4 +1,4 @@
-import { IAdditionInfo, IDailyForecasts,IWeatherOnHour, IWeatherNow } from "../interfaces";
+import { IAdditionInfo, IDailyForecasts,IWeatherOnHour, IWeatherNow, IDataCity } from "../interfaces";
 
 export const baseWeatherNow: IWeatherNow = {
     WeatherIcon: "1",
@@ -157,4 +157,10 @@ export const baseAdditionInfo:IAdditionInfo = {
 		}
     },
     RelativeHumidity:69
+}
+
+export const cityData:IDataCity={
+	Key:"293006",
+	LocalizedName:"Калуга",
+	EnglishName:"Kaluga"
 }
