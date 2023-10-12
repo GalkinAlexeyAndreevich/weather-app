@@ -21,8 +21,8 @@ import { useCurrentCityData } from "../../hooks/currentCityData";
 type TProps = NativeStackScreenProps<RootStackParamList, "WeatherPage">;
 
 export default function WeatherPage({ navigation }: TProps) {
-	const result = 	useCurrentCityData()
-    console.log(result);
+	// const result = 	useCurrentCityData()
+    // console.log(result);
     
     const { Key, LocalizedName } = useAppSelector((state) => state.city);
     const loadSettingsPage = () => {

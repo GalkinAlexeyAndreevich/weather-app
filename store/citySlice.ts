@@ -4,30 +4,19 @@ import { IDataCity} from "../interfaces";
 
 interface TypeState extends IDataCity {
     searchBy:"currentPlace" | "nameCity"
-    currentPlace:IDataCity
+}
+const initialState:TypeState = {
+    Key:"293006",
+    LocalizedName:"Калуга",
+    EnglishName:"Kaluga",
+    searchBy:"currentPlace",
 }
 // const initialState:TypeState = {
-//     Key:"293006",
-//     LocalizedName:"Калуга",
-//     EnglishName:"Kaluga",
+//     Key:"",
+//     LocalizedName:"",
+//     EnglishName:"",
 //     searchBy:"currentPlace",
-//     currentPlace:{
-//         Key:"293006",
-//         LocalizedName:"Калуга",
-//         EnglishName:"Kaluga",
-//     }
 // }
-const initialState:TypeState = {
-    Key:"",
-    LocalizedName:"",
-    EnglishName:"",
-    searchBy:"currentPlace",
-    currentPlace:{
-        Key:"293006",
-        LocalizedName:"Калуга",
-        EnglishName:"Kaluga",
-    }
-}
 
 
 const citySlice = createSlice({
@@ -38,10 +27,7 @@ const citySlice = createSlice({
             const  {Key,LocalizedName,EnglishName} = actions.payload
             const newObj:TypeState = {
                 Key,LocalizedName,EnglishName,
-                searchBy:"currentPlace",
-                currentPlace:{
-                    Key,LocalizedName,EnglishName,
-                }
+                searchBy:"currentPlace"
             }
             state = newObj
         },

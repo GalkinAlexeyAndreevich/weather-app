@@ -1,8 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View,useWindowDimensions} from "react-native";
 import { IDailyForecasts, IWeatherOnHour } from "../../../interfaces";
 import { convertDate } from "../../../utils/dateConverter";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 interface IProps {
 	weatherItem: IDailyForecasts
 }
@@ -14,11 +13,10 @@ export default function WeatherItem({ weatherItem }: IProps) {
 		Day,
 		Night
 	} = weatherItem;
-	
-	{ convertDate(Date) }
+  const {height, width, scale, fontScale} = useWindowDimensions();
 	let finalDate = `${convertDate(Date).month} ${convertDate(Date).day}`;
 	return (
-    <View style={styles.container}>
+    <View style={[styles.container,{width}]}>
       <View>
         <Text style={styles.text}>{finalDate}</Text>
         <Text style={styles.text}>{convertDate(Date).calendarDay}</Text>
@@ -62,7 +60,8 @@ const styles = StyleSheet.create({
     padding:15,
     borderRadius:10,
     borderWidth: 1,
-    // width:350,
+    // width:'100%',
+    maxWidth:700,
     borderColor: "thistle",
     // backgroundColor:'pink'
   },

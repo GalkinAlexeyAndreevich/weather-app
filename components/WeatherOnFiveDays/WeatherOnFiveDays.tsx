@@ -32,10 +32,11 @@ export default function WeatherOnFiveDays() {
 
 const styles = StyleSheet.create({
 	container: {
+		// width:350,
 		// flex: 3,
-		// display: "flex",
+		display: "flex",
 		// justifyContent: "center",
-		// alignItems: "center",
+		alignItems: "center",
 	},
 	paragraph: {
 		fontSize: 5,

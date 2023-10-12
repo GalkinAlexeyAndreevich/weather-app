@@ -8,6 +8,7 @@ import { getCityOnCode } from "../api/getWeather";
 export const useCurrentCityData = ()=>{
     const [result,setResult] = useState(false)
     const { cityData } = useLocation();
+    // let cityData = ""
     const dispatch = useAppDispatch();
     useEffect(() => {
         const getCitySettings = async () => {
