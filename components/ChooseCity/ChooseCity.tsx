@@ -5,7 +5,7 @@ import { RootStackParamList } from "../../routes/routes";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAppDispatch } from "../../store/hook";
 import { useLocation } from "../../hooks/Location";
-import { setChosenPlace } from "../../store/citySlice";
+import { setChosenPlace, setSearchBy } from "../../store/citySlice";
 
 type TProps = NativeStackScreenProps<RootStackParamList>;
 function ChooseCity({navigation}:TProps): JSX.Element {
@@ -13,11 +13,10 @@ function ChooseCity({navigation}:TProps): JSX.Element {
     const dispatch = useAppDispatch()
     const handlerCurrentPlace = () => {
         AsyncStorage.setItem('citySettings',JSON.stringify({
-            searchBy:"location",
+            searchBy:"currentPlace",
             Key:""
         }))
-        const {cityData} = useLocation()
-        cityData && dispatch(setChosenPlace(cityData))
+        dispatch(setSearchBy("currentPlace"))
     };
     return (
         <View>

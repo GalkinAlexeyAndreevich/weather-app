@@ -1,41 +1,75 @@
 import { useEffect, useState } from "react";
-import { setChosenPlace } from "../store/citySlice";
-import { useAppDispatch } from "../store/hook";
+import { setChosenPlace, setKey, setSearchBy } from "../store/citySlice";
+import { useAppDispatch, useAppSelector } from "../store/hook";
 import { useLocation } from "./Location";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getCityOnCode } from "../api/getWeather";
 
-export const useCurrentCityData = ()=>{
-    const [result,setResult] = useState(false)
-    const { cityData } = useLocation();
-    // let cityData = ""
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-        const getCitySettings = async () => {
-          try {
-            const value = await AsyncStorage.getItem('citySettings')
-            const data = value && JSON.parse(value)
-            if(data.searchBy === "nameCity" && data.Key){
-                const cityOnName = await getCityOnCode(data.Key)
-                if(!cityOnName)return
-                const {Key, EnglishName,LocalizedName} = cityOnName
-                cityOnName && dispatch(setChosenPlace({Key, EnglishName,LocalizedName}));
-            }else{
-              cityData && dispatch(setChosenPlace(cityData));
-            }
-            console.log("dispatch data");
-            
-          } catch (error) {
-            console.log('Error loading city info:', error);
-            AsyncStorage.setItem('citySettings',JSON.stringify({
-                searchBy:"location",
-                Key:""
-            }))
-          }
-        };
-        getCitySettings();
-        setResult(true)
-      }, [cityData]);
-      return result
-    // const savedTheme = await AsyncStorage.getItem('theme');
+export const useCurrentCityData = () => {
+  const [result, setResult] = useState(false)
+  const {searchBy,Key:key} = useAppSelector(state=>state.city)
+  const [localData, setLocalData] = useState({
+    searchBy: "",
+    Key: ""
+  })
+  const { cityData } = useLocation()
+  console.log(cityData);
+  console.log(searchBy,key);
+  
+  
+  // let cityData = ""
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    console.log("effect1");
+    
+    const getFromLocal = async () => {
+      const value = await AsyncStorage.getItem('citySettings')
+      const parseData = value && JSON.parse(value)
+      if (!parseData && !parseData.searchBy) {
+        let clearLocal = {
+          searchBy: "currentPlace",
+          Key: ""
+        }
+        AsyncStorage.setItem('citySettings', JSON.stringify(clearLocal))
+        setLocalData(clearLocal)
+        dispatch(setSearchBy(clearLocal.searchBy))
+        return
+      }
+      setLocalData(parseData)
+      dispatch(setKey(parseData.Key))
+      dispatch(setSearchBy(parseData.searchBy))
+    }
+    getFromLocal()
+  }, [])
+  useEffect(() => {
+    const getCitySettings = async () => {
+      try {
+        console.log(searchBy,key);
+        
+        if (searchBy === "nameCity" && key) {
+
+          const cityOnName = await getCityOnCode(key)
+          if (!cityOnName) return
+          const { Key, EnglishName, LocalizedName } = cityOnName
+          cityOnName && dispatch(setChosenPlace({ Key, EnglishName, LocalizedName }));
+          setResult(true)
+
+        } else if (searchBy == "currentPlace") {
+          console.log("dispatch34");
+          
+          cityData && dispatch(setChosenPlace(cityData));
+          setResult(true)
+        }
+        console.log("dispatch data");
+
+      } catch (error) {
+        console.log('Error loading city info:', error);
+      }
+    };
+    getCitySettings();
+    
+  }, [searchBy,key,cityData]);
+
+  return result
+  // const savedTheme = await AsyncStorage.getItem('theme');
 }

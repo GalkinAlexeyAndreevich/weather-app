@@ -10,24 +10,32 @@ import { AntDesign } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { useAppDispatch } from "../../store/hook";
 import { getCityDataOnName } from "../../api/getWeather";
-import {  setChosenPlace } from "../../store/citySlice";
+import {  setChosenPlace, setSearchBy } from "../../store/citySlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import useGetCityDataOnName from "../../api/react-query/useGetCityOnName";
 
 export default function SearchCityPage() {
     const inputAccessoryViewID = "uniqueID";
     const initialText = "";
     const [text, setText] = useState(initialText);
+    const [enabled,setEnabled] = useState(false)
     const dispatch = useAppDispatch()
+    const {data} = useGetCityDataOnName(text,enabled)
     const handleChangeCity = async() => {
         console.log(text);
-        const data = await getCityDataOnName(text)
+        setEnabled(true)
+        console.log(data);
+        
+        // const data = await getCityDataOnName(text)
         if(data){
             const {Key, EnglishName,LocalizedName} = data[0]
             dispatch(setChosenPlace({Key, EnglishName,LocalizedName}))
+            dispatch(setSearchBy("nameCity"))
             AsyncStorage.setItem('citySettings',JSON.stringify({
                 searchBy:"nameCity",
                 Key:Key
             }))
+            setEnabled(false)
         }     
     };
     return (

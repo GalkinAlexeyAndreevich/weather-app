@@ -69,3 +69,4 @@ export type typeTheme = {
     toggleTheme:()=>void,
 }
 
+export type searchBy = "currentPlace" | "nameCity"

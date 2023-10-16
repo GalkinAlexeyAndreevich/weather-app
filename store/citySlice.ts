@@ -3,20 +3,20 @@ import { IDataCity} from "../interfaces";
 
 
 interface TypeState extends IDataCity {
-    searchBy:"currentPlace" | "nameCity"
-}
-const initialState:TypeState = {
-    Key:"293006",
-    LocalizedName:"Калуга",
-    EnglishName:"Kaluga",
-    searchBy:"currentPlace",
+    searchBy:undefined | "currentPlace" | "nameCity"
 }
 // const initialState:TypeState = {
-//     Key:"",
-//     LocalizedName:"",
-//     EnglishName:"",
+//     Key:"293006",
+//     LocalizedName:"Калуга",
+//     EnglishName:"Kaluga",
 //     searchBy:"currentPlace",
 // }
+const initialState:TypeState = {
+    Key:"",
+    LocalizedName:"",
+    EnglishName:"",
+    searchBy:undefined,
+}
 
 
 const citySlice = createSlice({
@@ -38,11 +38,20 @@ const citySlice = createSlice({
             state.Key = Key
             state.LocalizedName = LocalizedName
             state.EnglishName = EnglishName
-            state.searchBy = "nameCity"
+        },
+        setSearchBy(state,actions:PayloadAction<string>){
+            const searchBy = actions.payload
+            if(searchBy =="nameCity" || searchBy== "currentPlace"){
+                state.searchBy = searchBy
+            }  
+        },
+        setKey(state,actions:PayloadAction<string>){
+            const Key = actions.payload
+            if(Key)state.Key = Key
         }
     },
 })
 
-export const {setCurrentPlace,setChosenPlace} = citySlice.actions
+export const {setCurrentPlace,setChosenPlace,setSearchBy,setKey} = citySlice.actions
 
 export default citySlice.reducer
