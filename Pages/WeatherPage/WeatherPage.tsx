@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, ActivityIndicator, View } from "react-native";
 import WeatherOnFiveDays from "../../components/WeatherOnFiveDays";
 import React, {  useEffect } from "react";
 import {
@@ -8,9 +8,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes/routes";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../../store/ThemeContext";
-import { useLocation } from "../../hooks/Location";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { setChosenPlace } from "../../store/citySlice";
 import WeatherToday from "../../components/WeatherToday";
 import { cityData } from "../../config/dataForNoFetch";
 import { useCurrentCityData } from "../../hooks/currentCityData";
@@ -24,7 +22,7 @@ export default function WeatherPage({ navigation }: TProps) {
 	const result = useCurrentCityData()
     console.log(result);
     
-    const { Key, LocalizedName } = useAppSelector((state) => state.city);
+    const { LocalizedName } = useAppSelector((state) => state.city);
     const loadSettingsPage = () => {
         navigation.navigate("SettingsPage");
     };
@@ -59,13 +57,16 @@ export default function WeatherPage({ navigation }: TProps) {
             headerTitleAlign: "center",
         });
     }, [colors, LocalizedName]);
-    if (!Key) return;
+    if (!result) {
+        return <ActivityIndicator />
+    };
     return (
         <View style={styles.container}>
             <ScrollView
                 alwaysBounceVertical={true}
                 horizontal={false}
                 showsVerticalScrollIndicator={false}>
+                
 				<WeatherToday />
                 <WeatherOnFiveDays />
             </ScrollView>

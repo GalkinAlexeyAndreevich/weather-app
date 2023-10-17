@@ -7,7 +7,7 @@ import {
     Pressable,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useState,useEffect} from "react";
 import { useAppDispatch } from "../../store/hook";
 import { getCityDataOnName } from "../../api/getWeather";
 import {  setChosenPlace, setSearchBy } from "../../store/citySlice";
@@ -20,14 +20,19 @@ export default function SearchCityPage() {
     const [text, setText] = useState(initialText);
     const [enabled,setEnabled] = useState(false)
     const dispatch = useAppDispatch()
-    const {data} = useGetCityDataOnName(text,enabled)
+    const {data,isSuccess} = useGetCityDataOnName(text,enabled)
+    console.log(data,isSuccess);
+    
     const handleChangeCity = async() => {
         console.log(text);
         setEnabled(true)
-        console.log(data);
+        console.log(enabled);
         
         // const data = await getCityDataOnName(text)
-        if(data){
+   
+    };
+    useEffect(()=>{
+        if(data && isSuccess){
             const {Key, EnglishName,LocalizedName} = data[0]
             dispatch(setChosenPlace({Key, EnglishName,LocalizedName}))
             dispatch(setSearchBy("nameCity"))
@@ -36,8 +41,9 @@ export default function SearchCityPage() {
                 Key:Key
             }))
             setEnabled(false)
-        }     
-    };
+            setText(initialText)
+        }  
+    },[data])
     return (
         <View>
             <Text>SearchCityPage</Text>

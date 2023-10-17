@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {View, StyleSheet } from "react-native";
+import {View, StyleSheet,ActivityIndicator } from "react-native";
 
 import { getWeatherOnFiveDays } from "../../api/getWeather";
 
@@ -7,11 +7,14 @@ import { IDailyForecasts } from "../../interfaces";
 import WeatherItem from "./WeatherItem";
 import {baseWeatherDataOnFiveDays} from "../../config/dataForNoFetch"
 import { useAppSelector } from "../../store/hook";
+import useGetWeatherOnFiveDays from "../../api/react-query/useGetWeatherOnFiveDays";
+import Loading from "../Loading";
 
 export default function WeatherOnFiveDays() {
 
-	const [weather, setWeather] = useState<IDailyForecasts[]>(baseWeatherDataOnFiveDays);
+	// const [weather, setWeather] = useState<IDailyForecasts[]>(baseWeatherDataOnFiveDays);
 	const codeCity = useAppSelector(state=>state.city.Key)
+	const {data:weather,isSuccess,isFetching} = useGetWeatherOnFiveDays(codeCity)
 	// useEffect(() => {
 	// 	(async () => {
 	// 		const weather = await getWeatherOnFiveDays(codeCity);
@@ -21,9 +24,13 @@ export default function WeatherOnFiveDays() {
 	// 	})();
 	// }, [codeCity]);
 
+	if (isFetching) {
+		return <ActivityIndicator />
+	}
+
 	return (
 		<View style={styles.container}>
-			{weather?.map((item: IDailyForecasts, index: number) => {
+			{isSuccess && weather?.map((item: IDailyForecasts, index: number) => {
 				return <WeatherItem key={index} weatherItem={item} />;
 			})}
 		</View>

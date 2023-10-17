@@ -11,18 +11,18 @@ const mbToMMHG = (mb: number) => {
   return Math.round(mb * 0.750062);
 };
 const kmHToMc = (speed: number) => {
-
-  return Math.round(speed * 0.750062);
+  
+  return Math.round(speed/3.6);
 };
 
 export default function AdditionWeatherInfoNow({ additionInfo }: IProps) {
   console.log(additionInfo);
 
   // const [additionInfo, setAdditionInfo] = useState<IAdditionInfo>();
-  if (!additionInfo) return;
+  // if (!additionInfo) return;
 
   return (
-    <View style={styles.container}>
+    additionInfo && <View style={styles.container}>
       <View style={styles.row}>
         <MaterialCommunityIcons
         style={styles.img}
