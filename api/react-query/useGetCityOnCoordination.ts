@@ -9,6 +9,6 @@ const useGetCityDataOnCoordination = (
     useQuery(
         ["getCityDataOnCoordination", coordination],
         () => getCityDataOnCoordination(coordination),
-        { enabled: enabled, cacheTime: 100000 }
+        { enabled: enabled, cacheTime: 10000000000 }
     );
 export default useGetCityDataOnCoordination;

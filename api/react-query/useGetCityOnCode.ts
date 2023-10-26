@@ -8,6 +8,6 @@ const useGetCityDataOnCode = (
     useQuery(
         ["getCityDataOnCode", codeCity],
         () => getCityOnCode(codeCity),
-        { enabled: enabled }
+        { enabled: enabled,cacheTime: 10000000000 }
     );
 export default useGetCityDataOnCode;

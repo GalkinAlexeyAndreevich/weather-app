@@ -19,7 +19,7 @@ function SettingsPage({ navigation,route }: TProps) {
             </Pressable>
             <View style={styles.row}>
                 <Text style={{paddingRight:50}}>Включить черную тему</Text>
-                <Switch onValueChange={toggleTheme} value={theme === "dark"} />
+                <Switch onValueChange={toggleTheme} value={theme === "black"} />
             </View>
             <ChooseCity {...{navigation,route }}/>
         </View>

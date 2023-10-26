@@ -28,7 +28,7 @@ export default function WeatherPage({ navigation }: TProps) {
     };
     const { theme, colors } = useTheme();
 
-    const styles = React.useMemo(() => getGlobalStyles(colors), [colors]);
+    // const styles = React.useMemo(() => getGlobalStyles(colors), [colors]);
 
     useEffect(() => {
         if(!LocalizedName)return
@@ -48,7 +48,7 @@ export default function WeatherPage({ navigation }: TProps) {
                         style={styles.settings}
                         name="settings-outline"
                         size={24}
-                        color="dark"
+                        color="black"
                     />
                 </Pressable>
             ),
@@ -61,7 +61,9 @@ export default function WeatherPage({ navigation }: TProps) {
         return <ActivityIndicator />
     };
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,{
+              backgroundColor:colors.background
+        }]}>
             <ScrollView
                 alwaysBounceVertical={true}
                 horizontal={false}
@@ -74,7 +76,7 @@ export default function WeatherPage({ navigation }: TProps) {
     );
 }
 
-const getGlobalStyles = (props: IColors) =>
+const styles = 
     StyleSheet.create({
         container: {
             display: "flex",
@@ -99,7 +101,7 @@ const getGlobalStyles = (props: IColors) =>
             alignItems: "center",
             justifyContent: "center",
             textAlign: "center",
-            color: props.text,
+            // color: props.text,
         },
         settings: {
             // 	marginLeft: "auto",

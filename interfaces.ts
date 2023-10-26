@@ -60,7 +60,8 @@ export interface IColors {
     secondary:string;
     fontColor:string;
     bgColor:string;
-    headingColor:string
+    headingColor:string;
+    iconColor:string
 }
 
 export type typeTheme = {

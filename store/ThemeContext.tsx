@@ -22,7 +22,7 @@ export const ThemeProvider = ({children}:Props) => {
     const getTheme = async () => {
       try {
         const savedTheme = await AsyncStorage.getItem('theme');
-        if(savedTheme ==="dark" || savedTheme ==="light"){
+        if(savedTheme ==="black" || savedTheme ==="light"){
           setTheme(savedTheme);
           console.log(savedTheme,"get");
         }
@@ -34,12 +34,12 @@ export const ThemeProvider = ({children}:Props) => {
   }, []);
   useEffect(()=>{
     if(theme==="light")setColors(Colors.light)
-    else if(theme==="dark") setColors(Colors.dark)
+    else if(theme==="black") setColors(Colors.black)
     console.log(colors);
   },[theme])
 
   const toggleTheme = () => {
-    const newTheme = theme == "dark"?"light":"dark"
+    const newTheme = theme == "black"?"light":"black"
     setTheme(newTheme);  
     AsyncStorage.setItem('theme', newTheme);
   };

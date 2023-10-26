@@ -10,12 +10,12 @@ interface IProps {
 export default function WeatherNow({ weatherNow }: IProps) {
 
 	const {colors}= useTheme()
-  const styles = React.useMemo(() => getGlobalStyles(colors), [colors]);
+  // const styles = React.useMemo(() => getGlobalStyles(colors), [colors]);
   if (!weatherNow.WeatherIcon) return;
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <Text style={styles.paragraph}>
+        <Text style={[styles.paragraph,{color:colors.text}]}>
           {Math.round(weatherNow.Temperature.Metric.Value)}°
         </Text>
         <Image
@@ -24,11 +24,11 @@ export default function WeatherNow({ weatherNow }: IProps) {
         />
       </View>
 
-      <Text style={styles.weatherText}>{weatherNow.WeatherText}</Text>
+      <Text style={[styles.weatherText,{color:colors.text}]}>{weatherNow.WeatherText}</Text>
     </View>
   );
 }
-const getGlobalStyles = (props:IColors) => StyleSheet.create({
+const styles =  StyleSheet.create({
   container: {
     display: "flex",
     justifyContent: "center",

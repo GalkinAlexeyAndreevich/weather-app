@@ -18,7 +18,7 @@
 import { IColors } from "../interfaces"
 
 
-export const Colors:{light:IColors,dark:IColors} ={
+export const Colors:{light:IColors,black:IColors} ={
     light:{
         background:"#f4f4f4",
         text:"#111111",
@@ -26,15 +26,17 @@ export const Colors:{light:IColors,dark:IColors} ={
         secondary:"#536390",
         fontColor:"#424242",
         bgColor:"#fff",
-        headingColor:"#292922"
+        headingColor:"#292922",
+        iconColor:"black"
     },
-    dark:{
+    black:{
         background:"#111111",
         text:"#f4f4f4",
         primary:"#9a97f3",
         secondary:"#818cab",
         fontColor:"#e1e1ff",
         bgColor:"#161625",
-        headingColor:"#292922"
+        headingColor:"#292922",
+        iconColor:"white"
     }
 }   

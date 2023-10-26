@@ -3,11 +3,13 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { IWeatherOnHour } from "../../../interfaces";
 import moment from "moment";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTheme } from "../../../store/ThemeContext";
 interface IProps{
 	weatherItem:IWeatherOnHour
 }
 
 export default function WeatherItem({ weatherItem }:IProps ) {
+	const {colors} = useTheme()
 	const {
 			DateTime,
 			WeatherIcon,
@@ -16,7 +18,7 @@ export default function WeatherItem({ weatherItem }:IProps ) {
 	} = weatherItem;
 	return (
     <View style={styles.container}>
-      <Text style={styles.text}>{moment(DateTime).hours()}:00</Text>
+      <Text style={[styles.paragraph ,{color:colors.text}]}>{moment(DateTime).hours()}:00</Text>
       <Image
         source={{
           uri: `https://developer.accuweather.com/sites/default/files/${
@@ -25,7 +27,7 @@ export default function WeatherItem({ weatherItem }:IProps ) {
         }}
         style={{ width: 40, height: 40 }}
       />
-      <Text style={styles.text}>{Math.round(Temperature.Value)}°</Text>
+      <Text style={[styles.paragraph ,{color:colors.text}]}>{Math.round(Temperature.Value)}°</Text>
 
       {/* <StatusBar style="auto" /> */}
     </View>
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
-	text: {
+	paragraph: {
 		fontSize: 15,
 		padding: 10,
 	},

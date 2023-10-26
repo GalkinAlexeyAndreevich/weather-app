@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCityDataOnCoordination, getCityOnCode, getWeatherNow, getWeatherOnFiveDays, getWeatherOnTwelveHour } from "../getWeather";
+import {  getWeatherOnTwelveHour } from "../getWeather";
 
 const useGetWeatherOnTwelveHour = (
     codeCity: string,
@@ -7,5 +7,6 @@ const useGetWeatherOnTwelveHour = (
     useQuery(
         ["getWeatherOnTwelveHour", codeCity],
         () => getWeatherOnTwelveHour(codeCity),
+        { cacheTime: 10000000000  }
     );
 export default useGetWeatherOnTwelveHour;

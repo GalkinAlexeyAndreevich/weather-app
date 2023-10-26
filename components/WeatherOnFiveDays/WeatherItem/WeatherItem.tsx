@@ -2,11 +2,13 @@ import { StatusBar } from "expo-status-bar";
 import { Image, StyleSheet, Text, View,useWindowDimensions} from "react-native";
 import { IDailyForecasts, IWeatherOnHour } from "../../../interfaces";
 import { convertDate } from "../../../utils/dateConverter";
+import { useTheme } from "../../../store/ThemeContext";
 interface IProps {
 	weatherItem: IDailyForecasts
 }
 
 export default function WeatherItem({ weatherItem }: IProps) {
+  const {colors} = useTheme()
 	const {
 		Date,
 		Temperature,
@@ -18,8 +20,8 @@ export default function WeatherItem({ weatherItem }: IProps) {
 	return (
     <View style={[styles.container,{width}]}>
       <View>
-        <Text style={styles.text}>{finalDate}</Text>
-        <Text style={styles.text}>{convertDate(Date).calendarDay}</Text>
+        <Text style={[styles.paragraph ,{color:colors.text}]}>{finalDate}</Text>
+        <Text style={[styles.paragraph ,{color:colors.text}]}>{convertDate(Date).calendarDay}</Text>
       </View>
       <View style={styles.row}>
         <Image
@@ -32,14 +34,14 @@ export default function WeatherItem({ weatherItem }: IProps) {
         />
 
         <View style={styles.column}>
-          <Text style={styles.text}>max</Text>
-          <Text style={styles.text}>
+          <Text style={[styles.paragraph ,{color:colors.text}]}>max</Text>
+          <Text style={[styles.paragraph ,{color:colors.text}]}>
             {Math.round(Temperature.Maximum.Value)}°
           </Text>
         </View>
         <View style={styles.column}>
-          <Text style={styles.text}>min </Text>
-          <Text style={styles.text}>
+          <Text style={[styles.paragraph ,{color:colors.text}]}>min </Text>
+          <Text style={[styles.paragraph ,{color:colors.text}]}>
             {Math.round(Temperature.Minimum.Value)}°
           </Text>
         </View>
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
     borderColor: "thistle",
     // backgroundColor:'pink'
   },
-  text: {
+  paragraph: {
     fontSize: 15,
     paddingRight: 10,
   },
