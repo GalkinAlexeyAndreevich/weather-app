@@ -25,11 +25,10 @@ const citySlice = createSlice({
     reducers:{
         setCurrentPlace(state,actions:PayloadAction<IDataCity>){
             const  {Key,LocalizedName,EnglishName} = actions.payload
-            const newObj:TypeState = {
-                Key,LocalizedName,EnglishName,
-                searchBy:"currentPlace"
-            }
-            state = newObj
+            state.Key = Key
+            state.LocalizedName = LocalizedName
+            state.EnglishName = EnglishName
+            state.searchBy = "currentPlace"
         },
         setChosenPlace(state,actions:PayloadAction<IDataCity>){
             const  {Key,LocalizedName,EnglishName} = actions.payload

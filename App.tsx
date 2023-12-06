@@ -11,7 +11,6 @@ export default function App() {
     return (
         <Provider store={store}>
         <ThemeProvider >
-           {/* <ScrollView horizontal={false} alwaysBounceVertical={false}> */}
            <View style={{
                     flex: 1,
                     display: "flex",
