@@ -1,3 +1,3 @@
-export const API_KEY: RequestInit | string = "qck3XONCF7pxcEgrs5ssU5TqBlMkhyEz";
+export const API_KEY: RequestInit | string = "MrL80HlG0MOrwvAeEuYacbdDuqER6XYw";
 // 	XG9vEGgluPaGNp8Cwwny0mz7JHdQOZFh - арслан
-// 		qck3XONCF7pxcEgrs5ssU5TqBlMkhyEz - я
+// 		MrL80HlG0MOrwvAeEuYacbdDuqER6XYw - я

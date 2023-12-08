@@ -57,8 +57,12 @@ export const useLocation = () => {
 				console.log(getCurrentLocation());
 				getCurrentLocation().then((result:any)=>{
 					console.log("Нашел координаты")
-					setCoordination(result.coords)
-					setIsLoading(true)
+					let {latitude,longitude } = result.coords
+					if(latitude && longitude){
+						setCoordination(result.coords)
+						setIsLoading(true)
+					}
+
 				})
 				// let location: TLocation = await Location.getCurrentPositionAsync({}).then((result)=>{
 				// 	console.log("Нашел координаты")
