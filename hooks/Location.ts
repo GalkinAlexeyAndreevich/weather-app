@@ -40,15 +40,34 @@ export const useLocation = () => {
 			setGranted(true)
 		})();
 	}, [check]);
+	function getCurrentLocation() {
+		const timeout = 10000;
+		return new Promise(async (resolve, reject) => {
+			setTimeout(() => { reject(new Error(`Error getting gps location after ${(timeout * 2) / 1000} s`)) }, timeout * 2);
+			setTimeout(async () => { resolve(await Location.getLastKnownPositionAsync()) }, timeout);
+			resolve(await Location.getCurrentPositionAsync());
+		});
+	}
 
 	useEffect(() => {
 		if(!granted)return
 		(async () => {
 			try{
 				console.log("test");
-				let location: TLocation = await Location.getCurrentPositionAsync({});
-				setCoordination(location.coords)
-				setIsLoading(true)
+				console.log(getCurrentLocation());
+				getCurrentLocation().then((result:any)=>{
+					console.log("Нашел координаты")
+					setCoordination(result.coords)
+					setIsLoading(true)
+				})
+				// let location: TLocation = await Location.getCurrentPositionAsync({}).then((result)=>{
+				// 	console.log("Нашел координаты")
+				// 	setCoordination(result.coords)
+				// 	setIsLoading(true)
+				// 	return result
+				// });
+				// console.log("Прошли дальше");				
+				// console.log(location);			
 			}catch(e){
 				setErrorMsg("Вы не разрешили узнать ваше местоположение");
 				setGranted(false)

@@ -66,10 +66,8 @@ export default function WeatherPage({ navigation }: TProps) {
     }, [colors, LocalizedName,result]);
     if (!result) {
         return (
-            <View>
-                <Text>Видимо идет загрузка</Text>
-                <Text>{LocalizedName}</Text>
-                <ActivityIndicator />
+            <View style={{display:"flex", justifyContent:"center", alignItems:"center", flex:1}}>
+                <ActivityIndicator size={40}/>
             </View>
 
         );

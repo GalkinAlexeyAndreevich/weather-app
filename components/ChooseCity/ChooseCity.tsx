@@ -14,7 +14,7 @@ type TProps = NativeStackScreenProps<RootStackParamList>
 function ChooseCity({navigation}:TProps): JSX.Element {
     const [isCurrentPlace, setIsCurrentPlace] = useState();
     const { colors } = useTheme();
-    const searchBy = useAppSelector(state=>state.city.searchBy)
+    const {searchBy,LocalizedName} = useAppSelector(state=>state.city)
     const dispatch = useAppDispatch()
     const handlerCurrentPlace = () => {
         AsyncStorage.setItem('citySettings',JSON.stringify({
@@ -32,7 +32,8 @@ function ChooseCity({navigation}:TProps): JSX.Element {
     return (
         <View style={[{backgroundColor:colors.background, paddingTop:20}]}>
             <Text style={{color:colors.text, fontSize:20}}>Место</Text>
-            <View style={{paddingTop:10}}>
+            <Text style={{color:colors.text,paddingVertical:10}}>Выбранное место: {LocalizedName}</Text>
+            <View>
                 <Pressable   onPress={handlerCurrentPlace}>
                     <Text style={{color:colors.text,paddingVertical:10, paddingHorizontal:10, borderWidth:searchBy=="currentPlace"?1:0, borderColor:colors.text, maxWidth:150}}>Текущее место</Text>
                 </Pressable>
