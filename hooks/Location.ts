@@ -30,6 +30,7 @@ export const useLocation = () => {
 		setIsLoading(false)
 		if(!check)return
 		(async () => {
+			console.log("Проверка на спрос локации");
 			
 			let { status } = await Location.requestForegroundPermissionsAsync()
 			if (status !== "granted") {

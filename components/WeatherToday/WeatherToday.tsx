@@ -51,16 +51,19 @@ export default function WeatherToday() {
             Pressure,
             RelativeHumidity,
         } = data;
+        console.log("Rerender from useEffect");
+        
         setWeatherNow({ WeatherIcon, Temperature, WeatherText });
         setAdditionInfo({ Wind, Pressure, RelativeHumidity });
     }, [data]);
     if (isFetching) {
         return <ActivityIndicator />
     }
-
+    console.log("Rerender from component")
     return (
         <View style={[styles.container]}>
             {weatherNow && <WeatherNow weatherNow={weatherNow} />}
+
             <View style={[styles.row, { maxWidth: width - 10 }]}>
                 <ScrollView
                     horizontal={true}

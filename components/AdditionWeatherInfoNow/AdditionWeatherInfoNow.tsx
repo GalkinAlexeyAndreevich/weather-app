@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
     alignItems:"center",
     flexDirection: "row",
     paddingBottom: 4,
-    width:"max-content"
   },
   img:{
     display:'flex',

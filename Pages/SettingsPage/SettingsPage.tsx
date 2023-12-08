@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Pressable, StyleSheet, Text, View, Switch } from "react-native";
+import { Pressable, StyleSheet, Text, View,Switch } from "react-native";
 import { RootStackParamList } from "../../routes/routes";
 import { useTheme } from "../../store/ThemeContext";
 import ChooseCity from "../../components/ChooseCity/ChooseCity";
@@ -32,8 +32,8 @@ function SettingsPage({ navigation,route }: TProps) {
             },
         ]}>
             <View style={styles.row}>
-                <Text style={{paddingRight:50, color:colors.text}}>Включить черную тему</Text>
-                <Switch onValueChange={toggleTheme} value={theme === "black"} />
+                <Text style={{paddingRight:10, color:colors.text, fontSize:18}}>Включить черную тему</Text>
+                <Switch style={{marginVertical:0, paddingVertical:0}} onValueChange={toggleTheme} value={theme === "black"} />
             </View>
             <ChooseCity {...{navigation,route }}/>
         </View>
@@ -45,7 +45,7 @@ export default SettingsPage;
 const styles = StyleSheet.create({
     container: {
         paddingBottom: 50,
-        paddingLeft:40,
+        paddingHorizontal:40,
         // marginHorizontal: "auto",
         // paddingRight: "auto",
         flex:1,
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     row: {
         display: "flex",
         flexDirection: "row",
+        alignItems:"center",
         flexWrap:"wrap",
         marginTop:30
     },

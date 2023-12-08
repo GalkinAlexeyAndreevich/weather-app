@@ -28,15 +28,22 @@ export const useCurrentCityData = () => {
     console.log("get from local");
     
     const getFromLocal = async () => {
+      AsyncStorage.setItem
       const value = await AsyncStorage.getItem('citySettings')
       const parseData = value && JSON.parse(value)
-      if (!parseData||(parseData && !parseData.searchBy)) {
+      console.log("Данные локалки", parseData);
+      // if(parseData.searchBy === "location"){
+      //   AsyncStorage.clear();
+      // }
+      let checkOnSearchBy = parseData && (parseData.searchBy ==="currentPlace" || parseData.searchBy ==="nameCity")
+      if (!checkOnSearchBy) {
         let clearLocal = {
           searchBy: "currentPlace",
           Key: ""
         }
         AsyncStorage.setItem('citySettings', JSON.stringify(clearLocal))
         dispatch(setSearchBy(clearLocal.searchBy))
+        dispatch(setKey(clearLocal.Key))
         return
       }
       dispatch(setKey(parseData.Key))

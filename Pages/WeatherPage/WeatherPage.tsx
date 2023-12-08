@@ -4,6 +4,7 @@ import {
     StyleSheet,
     ActivityIndicator,
     View,
+    Text,
 } from "react-native";
 import WeatherOnFiveDays from "../../components/WeatherOnFiveDays";
 import React, { useEffect } from "react";
@@ -62,9 +63,16 @@ export default function WeatherPage({ navigation }: TProps) {
             title: LocalizedName,
             headerTitleAlign: "center",
         });
-    }, [colors, LocalizedName]);
+    }, [colors, LocalizedName,result]);
     if (!result) {
-        return <ActivityIndicator />;
+        return (
+            <View>
+                <Text>Видимо идет загрузка</Text>
+                <Text>{LocalizedName}</Text>
+                <ActivityIndicator />
+            </View>
+
+        );
     }
     return (
         <View

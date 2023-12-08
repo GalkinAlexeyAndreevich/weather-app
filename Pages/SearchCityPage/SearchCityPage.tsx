@@ -47,7 +47,7 @@ export default function SearchCityPage() {
         }  
     },[data])
     return (
-        <View style={{backgroundColor:colors.background, maxWidth:600}}>
+        <View style={{backgroundColor:colors.background, maxWidth:600, paddingTop:10}}>
             <View style={[styles.row,{borderWidth:1, borderColor:colors.text}]}>
                 <ScrollView keyboardDismissMode="interactive">
                     <TextInput
